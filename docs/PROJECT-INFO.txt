@@ -1,0 +1,186 @@
+╔════════════════════════════════════════════════════════════════════╗
+║                                                                    ║
+║              🚀 DevTunnel v3.0                          ║
+║              Share Local Dev Servers Worldwide                     ║
+║                                                                    ║
+╚════════════════════════════════════════════════════════════════════╝
+
+📁 FOLDER STRUCTURE
+═══════════════════════════════════════════════════════════════════
+
+DevTunnel/
+│
+├── 🚀 LAUNCHERS (Root Folder - Easy to Find!)
+│   ├── 🪟 Windows → START.bat
+│   ├── 🍎 macOS   → START.command
+│   └── 🐧 Linux   → START.sh
+│
+├── 💻 SOURCE CODE (src/)
+│   ├── core/        → Main application logic
+│   ├── utils/       → Helper functions  
+│   └── config/      → Your settings (edit config.js!)
+│
+├── 📚 DOCUMENTATION (docs/)
+│   ├── README.md            → Full documentation
+│   ├── FEATURES.md          → All features explained
+│   ├── TROUBLESHOOTING.md   → Fix common issues
+│   ├── INSTRUCTIONS.md      → Setup guide
+│   └── STRUCTURE.md         → Project organization
+│
+├── 📊 LOGS (logs/)
+│   └── Application logs saved here
+│
+└── 📄 ROOT FILES
+    ├── README.md         → Quick overview
+    ├── QUICK-START.md    → Start here!
+    ├── package.json      → Dependencies
+    └── .gitignore        → Git settings
+
+═══════════════════════════════════════════════════════════════════
+
+🎯 QUICK START (EASIEST!)
+═══════════════════════════════════════════════════════════════════
+
+Windows Users:
+  1. Start your dev server (npm run dev)
+  2. Double-click: START.bat (in root folder)
+  3. Done! ✅
+
+Mac Users:
+  1. Start your dev server (npm run dev)
+  2. Double-click: START.command (in root folder)
+  3. Done! ✅
+
+Linux Users:
+  1. Start your dev server (npm run dev)
+  2. Run: ./START.sh (in root folder)
+  3. Done! ✅
+
+All Platforms (npm):
+  1. Start your dev server
+  2. Run: npm start
+  3. Done! ✅
+
+═══════════════════════════════════════════════════════════════════
+
+✨ KEY FEATURES
+═══════════════════════════════════════════════════════════════════
+
+✅ Zero Configuration    - Works out of the box
+✅ Cross-Platform        - Windows, Mac, Linux
+✅ Smart Proxy           - No Vite config changes needed
+✅ Auto-Install          - Sets up everything automatically
+✅ Multi-Tunnel          - Cloudflare → Ngrok → LocalTunnel
+✅ Custom Branding       - Add your name to outputs
+✅ Clean Logs            - Organized logging system
+✅ Professional          - Well-structured codebase
+
+═══════════════════════════════════════════════════════════════════
+
+🎨 CUSTOMIZE YOUR NAME
+═══════════════════════════════════════════════════════════════════
+
+Edit: src/config/config.js
+
+Change:
+  export const YOUR_NAME = "";
+
+To:
+  export const YOUR_NAME = "Your Name";
+
+Now everyone sees:
+  ✅ PUBLIC URL (Created by: Your Name)
+
+═══════════════════════════════════════════════════════════════════
+
+🌍 USE CASES
+═══════════════════════════════════════════════════════════════════
+
+Backend Sharing:
+  You: Run NestJS/Express locally
+  Tool: Creates public URL
+  Team: Uses URL from anywhere!
+
+Frontend + Backend:
+  Backend: Port 3000 → Public URL
+  Frontend: Uses that URL
+  Everyone: Works seamlessly!
+
+Demos:
+  You: Show project to clients
+  Tool: Instant public access
+  Clients: View from their devices!
+
+═══════════════════════════════════════════════════════════════════
+
+🔧 SUPPORTED FRAMEWORKS
+═══════════════════════════════════════════════════════════════════
+
+✅ Vite          ✅ NestJS       ✅ Django
+✅ React         ✅ Express      ✅ Flask
+✅ Next.js       ✅ FastAPI      ✅ Rails
+✅ Vue           ✅ Koa          ✅ Laravel
+✅ Angular       ✅ Hapi         ✅ ANY HTTP SERVER!
+
+═══════════════════════════════════════════════════════════════════
+
+📖 DOCUMENTATION
+═══════════════════════════════════════════════════════════════════
+
+Start Here:      QUICK-START.md
+Full Guide:      docs/README.md
+All Features:    docs/FEATURES.md
+Having Issues:   docs/TROUBLESHOOTING.md
+Customize:       docs/INSTRUCTIONS.md
+Structure:       docs/STRUCTURE.md
+
+═══════════════════════════════════════════════════════════════════
+
+💡 PRO TIPS
+═══════════════════════════════════════════════════════════════════
+
+1. Install Cloudflare for best performance (no password page)
+2. Keep your dev server running before starting tunnel
+3. Use different ports for multiple projects
+4. Share your custom name in config for team recognition
+5. Check logs/ folder if you encounter issues
+
+═══════════════════════════════════════════════════════════════════
+
+📦 REQUIREMENTS
+═══════════════════════════════════════════════════════════════════
+
+✅ Node.js 16+         (auto-installed on Windows)
+✅ Internet connection
+✅ Your dev server running
+
+Optional:
+  • Cloudflare (recommended - fast, no password)
+  • Ngrok (alternative tunnel service)
+
+═══════════════════════════════════════════════════════════════════
+
+🤝 SHARING WITH FRIENDS
+═══════════════════════════════════════════════════════════════════
+
+1. Edit src/config/config.js with your name
+2. Share the DevTunnel folder (ZIP or Git)
+3. Friends run the launcher for their OS
+4. They see your name in the output
+5. NO login needed for anyone!
+
+═══════════════════════════════════════════════════════════════════
+
+📄 LICENSE
+═══════════════════════════════════════════════════════════════════
+
+MIT License - Free to use, modify, and share!
+
+Made with 🤖 for zero-configuration dev sharing worldwide!
+
+═══════════════════════════════════════════════════════════════════
+
+Version: 3.0.0
+Last Updated: 2026-01-28
+
+═══════════════════════════════════════════════════════════════════

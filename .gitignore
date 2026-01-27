@@ -1,0 +1,14 @@
+node_modules/
+logs/*.log
+*.log
+.DS_Store
+.env
+.cloudflared-temp/
+*.backup
+*.pem
+.vscode/
+.idea/
+
+# Keep important JSON files
+!package.json
+!package-lock.json

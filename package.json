@@ -1,0 +1,56 @@
+{
+  "name": "devtunnel",
+  "version": "3.0.0",
+  "type": "module",
+  "description": "Share local dev servers worldwide - Zero config tunnel for any framework",
+  "main": "src/core/start.js",
+  "bin": {
+    "devtunnel": "src/core/RUN.js"
+  },
+  "scripts": {
+    "start": "node src/core/RUN.js",
+    "dev": "node src/core/RUN.js",
+    "run": "node src/core/RUN.js",
+    "tunnel": "node src/core/index.js"
+  },
+  "keywords": [
+    "tunnel",
+    "devtunnel",
+    "cloudflare",
+    "ngrok",
+    "localtunnel",
+    "dev-server",
+    "share",
+    "public-url",
+    "vite",
+    "react",
+    "nextjs",
+    "nestjs",
+    "express",
+    "backend",
+    "frontend",
+    "proxy",
+    "development",
+    "localhost",
+    "port-forwarding"
+  ],
+  "author": "maiz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/devtunnel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/devtunnel/issues"
+  },
+  "homepage": "https://github.com/yourusername/devtunnel#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "http-proxy": "^1.18.1",
+    "localtunnel": "^2.0.2",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {}
+}

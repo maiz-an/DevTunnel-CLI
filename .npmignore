@@ -1,0 +1,31 @@
+# NPM ignore file
+# These files won't be included if someone does npm publish
+
+# Development files
+src/
+bin/
+docs/
+logs/
+*.md
+!README.md
+
+# Config files
+.gitignore
+.npmignore
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
