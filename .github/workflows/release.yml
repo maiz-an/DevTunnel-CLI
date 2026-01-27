@@ -8,6 +8,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       
@@ -18,6 +20,35 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: DevTunnel ${{ github.ref }}
-          body_path: RELEASE-NOTES.md
+          body: |
+            # DevTunnel Release
+            
+            ## 🚀 What's New
+            
+            Share your local dev servers worldwide with zero configuration!
+            
+            ## 📦 Installation
+            
+            ```bash
+            git clone https://github.com/maiz-an/DevTunnel.git
+            cd DevTunnel
+            npm install
+            npm start
+            ```
+            
+            ## ✨ Features
+            - 🤖 Fully automatic setup
+            - 🎯 Zero config required
+            - 🔗 Smart proxy for Vite/React/Next.js
+            - 🌍 Cross-platform (Windows, macOS, Linux)
+            - 📝 Custom branding support
+            
+            ## 📖 Documentation
+            
+            Full documentation available in the `docs/` folder.
+            
+            ---
+            
+            **Made with ❤️ for developers worldwide** 🌍
           draft: false
           prerelease: false
