@@ -136,15 +136,16 @@ async function autoDetectProject() {
     const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
     const projectName = packageJson.name || basename(currentDir);
     
-    // Try to detect port
-    let detectedPort = detectPortFromPackage(packagePath);
+    // FIRST: Check for running dev servers (priority)
+    const runningPorts = await detectRunningDevServer();
+    let detectedPort = null;
     
-    // If no port detected, check running servers
-    if (!detectedPort) {
-      const runningPorts = await detectRunningDevServer();
-      if (runningPorts.length > 0) {
-        detectedPort = runningPorts[0]; // Use first detected port
-      }
+    if (runningPorts.length > 0) {
+      // Use running server port (most accurate)
+      detectedPort = runningPorts[0];
+    } else {
+      // Fallback: Try to detect port from package.json
+      detectedPort = detectPortFromPackage(packagePath);
     }
     
     return {
@@ -281,10 +282,48 @@ async function main() {
     // Auto-detected project with port
     projectPath = autoDetected.path;
     projectName = autoDetected.name;
-    devPort = autoDetected.port;
+    
+    // Double-check: verify the port is actually in use
+    const portInUse = await checkPortInUse(autoDetected.port);
+    
+    if (!portInUse) {
+      // Detected port is not actually running, check for other running servers
+      console.log(`Detected port ${autoDetected.port} from package.json, but no server running on that port`);
+      console.log("Checking for running dev servers...");
+      
+      const runningPorts = await detectRunningDevServer();
+      if (runningPorts.length > 0) {
+        if (runningPorts.length === 1) {
+          devPort = runningPorts[0];
+          console.log(`Found running dev server on port: ${devPort}`);
+        } else {
+          console.log(`Found ${runningPorts.length} running dev server(s) on port(s): ${runningPorts.join(', ')}`);
+          const portResponse = await prompts({
+            type: "select",
+            name: "port",
+            message: "Select port:",
+            choices: runningPorts.map(p => ({ title: `Port ${p}`, value: p }))
+          });
+          
+          if (!portResponse.port) {
+            console.log("ERROR: No port selected");
+            process.exit(1);
+          }
+          
+          devPort = portResponse.port;
+        }
+      } else {
+        // No running servers, use detected port (user might start it later)
+        devPort = autoDetected.port;
+        console.log(`Using detected port: ${devPort} (make sure dev server is running)`);
+      }
+    } else {
+      // Port is in use, use it
+      devPort = autoDetected.port;
+    }
     
     console.log(`Detected project: ${projectName}`);
-    console.log(`Detected port: ${devPort}`);
+    console.log(`Using port: ${devPort}`);
     console.log(`Using current directory: ${projectPath}`);
     console.log("");
     
