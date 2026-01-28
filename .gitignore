@@ -9,6 +9,9 @@ logs/*.log
 .vscode/
 .idea/
 
+# Website prototype (private - for internal reference only)
+src/utils/pages/
+
 # Keep important JSON files
 !package.json
 !package-lock.json
