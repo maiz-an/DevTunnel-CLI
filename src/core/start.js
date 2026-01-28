@@ -48,19 +48,25 @@ async function main() {
   }
   console.log("✅ SUCCESS: Node.js installed\n");
 
-  // Step 2: Check Cloudflare
+  // Step 2: Check Cloudflare (Windows only auto-install)
   console.log("[2/4] Checking Cloudflare...");
   if (!await commandExists("cloudflared")) {
-    console.log("⚡ Installing Cloudflare...");
-    const result = await runCommand("winget", [
-      "install", "--id", "Cloudflare.cloudflared",
-      "--silent", "--accept-source-agreements", "--accept-package-agreements"
-    ]);
-    
-    if (result.code === 0) {
-      console.log("✅ SUCCESS: Cloudflare installed");
+    const platform = process.platform;
+    if (platform === "win32") {
+      console.log("⚡ Installing Cloudflare...");
+      const result = await runCommand("winget", [
+        "install", "--id", "Cloudflare.cloudflared",
+        "--silent", "--accept-source-agreements", "--accept-package-agreements"
+      ]);
+      
+      if (result.code === 0) {
+        console.log("✅ SUCCESS: Cloudflare installed");
+      } else {
+        console.log("⚠️  WARNING: Cloudflare install failed (will use fallback)");
+      }
     } else {
-      console.log("⚠️  WARNING: Cloudflare install failed (will use fallback)");
+      console.log("⚠️  Cloudflare not found (will use fallback tunnels)");
+      console.log("💡 Install: brew install cloudflare/cloudflare/cloudflared (Mac)");
     }
   } else {
     console.log("✅ SUCCESS: Cloudflare already installed");

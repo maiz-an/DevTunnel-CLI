@@ -264,36 +264,69 @@ function setupTunnelHandlers(serviceName) {
           const urlMatch = trimmed.match(/(https?:\/\/[^\s]+trycloudflare\.com[^\s]*)/);
           if (urlMatch) {
             const url = urlMatch[1];
+            const boxWidth = Math.max(60, url.length + 4);
+            const urlPadding = boxWidth - 4 - url.length;
             
-            console.log("\n╔" + "═".repeat(58) + "╗");
+            console.log("\n╔" + "═".repeat(boxWidth) + "╗");
             if (customPrefix) {
-              console.log("║  ✅ PUBLIC URL (Created by: " + customPrefix.padEnd(26) + ") ║");
+              const headerText = `✅ PUBLIC URL (Created by: ${customPrefix})`;
+              const headerPadding = boxWidth - 2 - headerText.length;
+              console.log("║  " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
             } else {
-              console.log("║  ✅ PUBLIC URL" + " ".repeat(42) + " ║");
+              const headerText = "✅ PUBLIC URL";
+              const headerPadding = boxWidth - 2 - headerText.length;
+              console.log("║  " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
             }
-            console.log("╠" + "═".repeat(58) + "╣");
-            console.log("║  " + url.padEnd(56) + "║");
+            console.log("╠" + "═".repeat(boxWidth) + "╣");
+            console.log("║  " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
             if (customPrefix) {
-              console.log("╠" + "─".repeat(58) + "╣");
-              console.log("║  👤 Creator: " + customPrefix.padEnd(43) + " ║");
-              console.log("║  💡 Share this URL with your team!" + " ".repeat(22) + " ║");
+              console.log("╠" + "─".repeat(boxWidth) + "╣");
+              const creatorText = `👤 Creator: ${customPrefix}`;
+              const creatorPadding = boxWidth - 2 - creatorText.length;
+              console.log("║  " + creatorText + " ".repeat(Math.max(0, creatorPadding)) + "║");
+              const shareText = "💡 Share this URL with your team!";
+              const sharePadding = boxWidth - 2 - shareText.length;
+              console.log("║  " + shareText + " ".repeat(Math.max(0, sharePadding)) + "║");
             }
-            console.log("╚" + "═".repeat(58) + "╝\n");
+            console.log("╚" + "═".repeat(boxWidth) + "╝\n");
           }
         }
         // Show other important messages (but filter out most INF/WRN logs)
         else if (!trimmed.includes("INF") && !trimmed.includes("WRN") && !trimmed.includes("+---")) {
-          console.log(`   ${trimmed}`);
+          // Don't show these lines
         }
       } else if (serviceName === "Ngrok") {
         if (trimmed.includes("https://") || trimmed.includes("http://")) {
-          console.log("\n" + "=".repeat(50));
-          console.log("✅ PUBLIC URL:");
-          console.log(`   ${trimmed}`);
-          console.log("=".repeat(50) + "\n");
+          const url = trimmed;
+          const boxWidth = Math.max(60, url.length + 4);
+          const urlPadding = boxWidth - 4 - url.length;
+          
+          console.log("\n╔" + "═".repeat(boxWidth) + "╗");
+          const headerText = "✅ PUBLIC URL";
+          const headerPadding = boxWidth - 2 - headerText.length;
+          console.log("║  " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
+          console.log("╠" + "═".repeat(boxWidth) + "╣");
+          console.log("║  " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
+          console.log("╚" + "═".repeat(boxWidth) + "╝\n");
         }
       } else {
-        console.log(trimmed);
+        // LocalTunnel or other services
+        if (trimmed.includes("your url is:")) {
+          const urlMatch = trimmed.match(/https?:\/\/[^\s]+/);
+          if (urlMatch) {
+            const url = urlMatch[0];
+            const boxWidth = Math.max(60, url.length + 4);
+            const urlPadding = boxWidth - 4 - url.length;
+            
+            console.log("\n╔" + "═".repeat(boxWidth) + "╗");
+            const headerText = "✅ PUBLIC URL";
+            const headerPadding = boxWidth - 2 - headerText.length;
+            console.log("║  " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
+            console.log("╠" + "═".repeat(boxWidth) + "╣");
+            console.log("║  " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
+            console.log("╚" + "═".repeat(boxWidth) + "╝\n");
+          }
+        }
       }
     });
   });
