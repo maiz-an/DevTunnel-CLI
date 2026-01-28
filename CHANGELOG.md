@@ -2,6 +2,12 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.1] - 2026-01-28
+
+### Fixed
+- **npm Install Path Issue** - Fixed module resolution error when installed via `npm install -g devtunnel-cli`
+- Path resolution now works correctly for both npm install and repo run methods
+
 ## [3.0.0] - 2026-01-28
 
 ### 🎉 Major Release
