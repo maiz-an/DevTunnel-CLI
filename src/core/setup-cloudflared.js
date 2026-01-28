@@ -39,37 +39,59 @@ export function getBinaryPath() {
   return path.join(BIN_DIR, platform, binName);
 }
 
-// Check available disk space (basic check)
 function hasEnoughDiskSpace() {
   try {
     const stats = fs.statfsSync ? fs.statfsSync(BIN_DIR) : null;
     if (stats) {
       const availableSpace = stats.bavail * stats.bsize;
-      const requiredSpace = 50 * 1024 * 1024; // 50MB
+      const requiredSpace = 50 * 1024 * 1024;
       return availableSpace > requiredSpace;
     }
-    return true; // Assume OK if we can't check
+    return true;
   } catch {
-    return true; // Assume OK if check fails
+    return true;
+  }
+}
+
+function safeUnlink(filePath) {
+  try {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+  } catch (err) {
+    // Ignore permission errors - file might be locked or in use
+    // Will be cleaned up later or on next run
   }
 }
 
 function downloadFile(url, dest, retryCount = 0) {
   return new Promise((resolve, reject) => {
-    // Create directory if needed
     const dir = path.dirname(dest);
     try {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       }
     } catch (err) {
-      reject(new Error(`Cannot create directory: ${err.message}`));
+      reject(new Error(`Cannot create directory: ${err.message}. Try running as administrator or choose a different location.`));
       return;
     }
 
-    // Create temp file first
     const tempDest = dest + '.download';
-    const file = fs.createWriteStream(tempDest);
+    
+    // Clean up any existing temp file first
+    safeUnlink(tempDest);
+    
+    let file;
+    try {
+      file = fs.createWriteStream(tempDest);
+    } catch (err) {
+      if (err.code === 'EPERM' || err.code === 'EACCES') {
+        reject(new Error(`Permission denied: Cannot write to ${dir}. Try running as administrator or check antivirus settings.`));
+      } else {
+        reject(new Error(`Cannot create download file: ${err.message}`));
+      }
+      return;
+    }
     
     const request = https.get(url, { 
       headers: { 
@@ -78,10 +100,9 @@ function downloadFile(url, dest, retryCount = 0) {
       },
       timeout: 30000 // 30 second timeout
     }, (response) => {
-      // Follow redirects
       if (response.statusCode === 302 || response.statusCode === 301) {
         file.close();
-        fs.unlinkSync(tempDest);
+        safeUnlink(tempDest);
         downloadFile(response.headers.location, dest, retryCount)
           .then(resolve)
           .catch(reject);
@@ -90,7 +111,7 @@ function downloadFile(url, dest, retryCount = 0) {
 
       if (response.statusCode !== 200) {
         file.close();
-        fs.unlinkSync(tempDest);
+        safeUnlink(tempDest);
         reject(new Error(`HTTP ${response.statusCode}: ${response.statusMessage}`));
         return;
       }
@@ -155,20 +176,24 @@ function downloadFile(url, dest, retryCount = 0) {
     request.on('timeout', () => {
       request.destroy();
       file.close();
-      if (fs.existsSync(tempDest)) fs.unlinkSync(tempDest);
+      safeUnlink(tempDest);
       reject(new Error('Download timeout (30 seconds)'));
     });
 
     request.on('error', (err) => {
       file.close();
-      if (fs.existsSync(tempDest)) fs.unlinkSync(tempDest);
+      safeUnlink(tempDest);
       reject(err);
     });
 
     file.on('error', (err) => {
       file.close();
-      if (fs.existsSync(tempDest)) fs.unlinkSync(tempDest);
-      reject(new Error(`File write error: ${err.message}`));
+      safeUnlink(tempDest);
+      if (err.code === 'EPERM' || err.code === 'EACCES') {
+        reject(new Error(`Permission denied: Cannot write to ${tempDest}. Try running as administrator or check antivirus settings.`));
+      } else {
+        reject(new Error(`File write error: ${err.message}`));
+      }
     });
   });
 }
@@ -193,7 +218,15 @@ async function downloadWithRetry(urls, dest, maxRetries = 3) {
         const isLastRetry = retry === maxRetries - 1;
         const isLastUrl = urlIndex === urls.length - 1;
         
-        if (err.message.includes('ENOTFOUND') || err.message.includes('ECONNREFUSED')) {
+        if (err.message.includes('Permission denied') || err.message.includes('EPERM') || err.message.includes('EACCES')) {
+          console.log(`\n❌ Permission Error: ${err.message}`);
+          console.log('\n💡 Solutions:');
+          console.log('   1. Run terminal as Administrator (Right-click → Run as administrator)');
+          console.log('   2. Check if antivirus is blocking file writes');
+          console.log('   3. Check folder permissions for:', path.dirname(dest));
+          console.log('   4. Try installing manually: https://github.com/cloudflare/cloudflared/releases\n');
+          throw err; // Don't retry permission errors
+        } else if (err.message.includes('ENOTFOUND') || err.message.includes('ECONNREFUSED')) {
           console.log(`\n❌ Network error: ${err.message}`);
         } else if (err.message.includes('timeout')) {
           console.log(`\n❌ Download timeout`);
@@ -207,7 +240,7 @@ async function downloadWithRetry(urls, dest, maxRetries = 3) {
         
         if (isLastRetry) {
           console.log('💡 Trying alternative source...\n');
-          break; // Try next URL
+          break;
         }
       }
     }
@@ -240,13 +273,11 @@ export async function setupCloudflared() {
         return binaryPath;
       } else {
         console.log('⚠️  Existing binary not working, re-downloading...\n');
-        fs.unlinkSync(binaryPath);
+        safeUnlink(binaryPath);
       }
     } catch {
       console.log('⚠️  Existing binary corrupted, re-downloading...\n');
-      try {
-        fs.unlinkSync(binaryPath);
-      } catch {}
+      safeUnlink(binaryPath);
     }
   }
 
@@ -303,9 +334,7 @@ export async function setupCloudflared() {
       return binaryPath;
     } else {
       console.error('❌ Downloaded binary not working properly');
-      try {
-        fs.unlinkSync(binaryPath);
-      } catch {}
+      safeUnlink(binaryPath);
       return null;
     }
     
@@ -315,11 +344,20 @@ export async function setupCloudflared() {
     console.error('╚════════════════════════════════════════╝\n');
     console.error(`Reason: ${err.message}\n`);
     
-    console.log('💡 Troubleshooting:');
-    console.log('   1. Check internet connection');
-    console.log('   2. Check firewall/antivirus settings');
-    console.log('   3. Try again later');
-    console.log('   4. Install manually: https://github.com/cloudflare/cloudflared/releases\n');
+    if (err.message.includes('Permission denied') || err.message.includes('EPERM') || err.message.includes('EACCES')) {
+      console.log('💡 Permission Error Solutions:');
+      console.log('   1. Run terminal as Administrator (Right-click → Run as administrator)');
+      console.log('   2. Check antivirus is not blocking file writes');
+      console.log('   3. Check folder permissions for:', path.dirname(binaryPath));
+      console.log('   4. Try installing Cloudflare manually:');
+      console.log('      https://github.com/cloudflare/cloudflared/releases\n');
+    } else {
+      console.log('💡 Troubleshooting:');
+      console.log('   1. Check internet connection');
+      console.log('   2. Check firewall/antivirus settings');
+      console.log('   3. Try running as administrator');
+      console.log('   4. Install manually: https://github.com/cloudflare/cloudflared/releases\n');
+    }
     
     console.log('🔄 DevTunnel will use fallback tunnels (Ngrok/LocalTunnel)\n');
     

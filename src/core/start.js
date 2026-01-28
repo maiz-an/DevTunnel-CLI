@@ -174,7 +174,6 @@ function showLogo() {
   console.log("");
 }
 
-// Main function
 async function main() {
   // Clear screen - works on Windows, macOS, Linux
   // ANSI escape codes for clear screen + cursor to top
