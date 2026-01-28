@@ -2,6 +2,12 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.15] - 2026-01-28
+
+### Changed
+- **Command Name** - Changed command from `devtunnel` to `devtunnel-cli` for consistency with package name
+- **Consistency** - Package name and command are now both `devtunnel-cli`
+
 ## [3.0.14] - 2026-01-28
 
 ### Fixed

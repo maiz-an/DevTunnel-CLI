@@ -183,7 +183,7 @@ async function main() {
   // Show ASCII logo
   showLogo();
   
-  console.log("DevTunnel v3.0.14");
+  console.log("DevTunnel v3.0.15");
   console.log("Share your local dev servers worldwide");
   console.log("");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
