@@ -1,62 +1,121 @@
-# 🎨 How to Show Your Name as Creator
+# 📝 Quick Start Instructions
 
-## Super Easy - Just Edit One File!
+## 🚀 How to Use DevTunnel
 
-### Step 1: Open `src/config/config.js`
-
-Find this line:
-```javascript
-export const YOUR_NAME = "";
+### Step 1: Start Your Dev Server
+```bash
+npm start
+# OR
+npm run dev
+# OR whatever command your project uses
 ```
 
-### Step 2: Add your name:
+### Step 2: Run DevTunnel
 
-```javascript
-export const YOUR_NAME = "John";  // Put YOUR name here!
+**Windows:**
+```
+Double-click: START.bat
 ```
 
-### Step 3: Save and share!
-
-When you or friends run the app, they'll see:
-
+**macOS:**
 ```
-✅ PUBLIC URL (Created by: John):
-   https://random-abc-xyz.trycloudflare.com
-
-   👤 Creator: John
-   💡 Share this URL with your team!
+Double-click: START.command
 ```
+
+**Linux:**
+```bash
+chmod +x START.sh
+./START.sh
+```
+
+**Or use npm:**
+```bash
+npm start
+```
+
+### Step 3: Select Your Project
+
+A modern folder picker will open. Navigate to and select your project folder.
+
+### Step 4: Enter Port Number
+
+Enter the port your dev server is running on:
+- Vite: Usually `5173`
+- Create React App: Usually `3000`
+- Next.js: Usually `3000`
+- Express/NestJS: Usually `3000` or `4000`
+
+### Step 5: Get Your Public URL!
+
+DevTunnel will display:
+```
+╔═══════════════════════════════════════════════════╗
+║ ✅ PUBLIC URL                                    ║
+╠═══════════════════════════════════════════════════╣
+║ https://your-app-xyz.trycloudflare.com          ║
+╠═══════════════════════════════════════════════════╣
+║ 💡 Share this URL with anyone!                  ║
+╚═══════════════════════════════════════════════════╝
+```
+
+**Share this URL with anyone worldwide!**
 
 ---
 
-## When you share with friends:
+## 🎯 What Happens Behind the Scenes
 
-1. You edit `src/config/config.js` with YOUR name
-2. You share the DevTunnel folder
-3. Friends run the launcher for their OS
-4. **They see it's YOUR backend!**
-5. **NO login needed for anyone!**
+1. **Auto-Check:**
+   - Checks Node.js ✅
+   - Checks/downloads Cloudflare (first run only) ✅
+   - Installs dependencies ✅
 
----
+2. **Smart Proxy:**
+   - Creates proxy server on port 4000
+   - Forwards requests to your dev server
+   - Handles all host restrictions
+   - No config changes needed!
 
-## Examples:
-
-```javascript
-export const YOUR_NAME = "John";              // Personal name
-export const YOUR_NAME = "Sarah's Backend";   // Descriptive
-export const YOUR_NAME = "Team Rocket API";   // Team name
-export const YOUR_NAME = "MyCompany Dev";     // Company name
-```
-
----
-
-## Benefits:
-
-✅ **Team knows whose backend** - No confusion  
-✅ **Professional** - Shows who created it  
-✅ **Simple** - Just edit one line  
-✅ **No login** - Friends don't need accounts  
+3. **Tunnel Creation:**
+   - Tries Cloudflare (fastest, no password)
+   - Falls back to Ngrok if needed
+   - Falls back to LocalTunnel if needed
+   - Always works!
 
 ---
 
-**That's it! Let your team know it's YOUR backend! 🚀**
+## 💡 Tips
+
+- **First Run:** Takes 15-30 seconds (downloads Cloudflare)
+- **Subsequent Runs:** Instant start!
+- **Multiple Projects:** Run for each project separately
+- **Stop Tunnel:** Press `Ctrl+C` in the terminal
+- **Different Port:** Just enter new port when prompted
+
+---
+
+## 🔄 Sharing with Friends
+
+1. Share the DevTunnel folder (ZIP or GitHub clone)
+2. Friends run START.bat/START.command/START.sh
+3. They select their project
+4. They get instant public URL
+5. **No login needed for anyone!**
+
+---
+
+## 🆘 Troubleshooting
+
+**Problem:** "Blocked request" error  
+**Solution:** Already handled by proxy! Should work automatically.
+
+**Problem:** Cloudflare download fails  
+**Solution:** Will automatically use Ngrok or LocalTunnel.
+
+**Problem:** Folder picker doesn't open  
+**Solution:** Run with `npm start` instead.
+
+See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for more help.
+
+---
+
+**That's it! DevTunnel is designed to just work!** 🚀
