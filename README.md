@@ -4,8 +4,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](https://github.com/maiz-an/DevTunnel)
+[![npm version](https://img.shields.io/npm/v/devtunnel-cli)](https://www.npmjs.com/package/devtunnel-cli)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://maiz-an.github.io/DevTunnel/)
 
-🌐 **Website:** [devtunnel.vercel.app](https://devtunnel.vercel.app)
+🌐 **Website:** [devtunnel.vercel.app](https://devtunnel.vercel.app) | 📦 **npm:** [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli) | 💻 **GitHub Pages:** [maiz-an.github.io/DevTunnel](https://maiz-an.github.io/DevTunnel/)
 
 ---
 
@@ -87,4 +89,21 @@ MIT License - see [LICENSE](docs/LICENSE)
 
 ---
 
-**Version 3.0.0** | Made with ❤️ for developers worldwide
+**Version 3.0.6** | Made with ❤️ for developers worldwide
+
+---
+
+## 🔍 Search Keywords
+
+**DevTunnel** | **dev tunnel** | **localhost tunnel** | **cloudflare tunnel** | **ngrok alternative** | **port forwarding** | **local development** | **vite tunnel** | **react dev server** | **nextjs tunnel** | **npm devtunnel** | **devtunnel-cli** | **share localhost** | **development tools** | **zero config tunnel**
+
+---
+
+## 📦 Installation & Links
+
+- **npm Package**: [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli)
+- **GitHub Repository**: [maiz-an/DevTunnel](https://github.com/maiz-an/DevTunnel)
+- **GitHub Pages**: [maiz-an.github.io/DevTunnel](https://maiz-an.github.io/DevTunnel/)
+- **Official Website**: [devtunnel.vercel.app](https://devtunnel.vercel.app)
+- **Documentation**: [docs/README.md](docs/README.md)
+- **Issues**: [GitHub Issues](https://github.com/maiz-an/DevTunnel/issues)

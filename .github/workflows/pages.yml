@@ -1,0 +1,126 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create GitHub Pages site
+        run: |
+          mkdir -p _site
+          # Copy README as index
+          cp README.md _site/index.md
+          # Create a simple HTML page
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="DevTunnel - Share local dev servers worldwide. Zero configuration tunnel for any framework. Install via npm: npm install -g devtunnel-cli">
+            <meta name="keywords" content="dev tunnel, localhost tunnel, cloudflare, ngrok, port forwarding, local development, vite, react, nextjs, npm install, devtunnel-cli">
+            <meta name="author" content="maiz">
+            <meta name="robots" content="index, follow">
+            <link rel="canonical" href="https://maiz-an.github.io/DevTunnel/">
+            <meta property="og:title" content="DevTunnel - Share Local Servers Worldwide">
+            <meta property="og:description" content="Zero configuration tunnel for any framework. Install via npm: npm install -g devtunnel-cli">
+            <meta property="og:url" content="https://maiz-an.github.io/DevTunnel/">
+            <meta property="og:type" content="website">
+            <meta property="og:image" content="https://devtunnel.vercel.app/og-image.png">
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="DevTunnel - Share Local Servers Worldwide">
+            <meta name="twitter:description" content="Zero configuration tunnel for any framework">
+            <meta name="twitter:image" content="https://devtunnel.vercel.app/og-image.png">
+            <title>DevTunnel - Share Local Servers Worldwide</title>
+            <style>
+              body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+              h1 { color: #3b82f6; }
+              .badge { display: inline-block; padding: 4px 8px; background: #3b82f6; color: white; border-radius: 4px; margin: 5px; text-decoration: none; }
+              .links { margin: 20px 0; }
+              .links a { margin-right: 15px; color: #3b82f6; text-decoration: none; }
+              code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
+              pre { background: #1e293b; color: #f1f5f9; padding: 15px; border-radius: 5px; overflow-x: auto; }
+            </style>
+          </head>
+          <body>
+            <h1>🚀 DevTunnel</h1>
+            <p><strong>Share your local dev servers worldwide - Zero config tunnel for any framework</strong></p>
+            
+            <div class="links">
+              <a href="https://www.npmjs.com/package/devtunnel-cli" class="badge">📦 npm Package</a>
+              <a href="https://devtunnel.vercel.app" class="badge">🌐 Website</a>
+              <a href="https://github.com/maiz-an/DevTunnel" class="badge">💻 GitHub</a>
+            </div>
+
+            <h2>⚡ Quick Start</h2>
+            <h3>Install via npm (Recommended)</h3>
+            <pre><code>npm install -g devtunnel-cli
+devtunnel</code></pre>
+
+            <h2>✨ Features</h2>
+            <ul>
+              <li>🤖 Fully Automatic - Cloudflare bundled, no installation needed</li>
+              <li>🎯 Zero Config - No project changes needed</li>
+              <li>🔗 Smart Proxy - Bypasses Vite/React restrictions</li>
+              <li>🌍 Cross-Platform - Windows, macOS, Linux</li>
+              <li>🚀 Any Framework - Works with all</li>
+              <li>🔄 Multi-Service - Cloudflare, Ngrok, LocalTunnel fallback</li>
+            </ul>
+
+            <h2>📖 Documentation</h2>
+            <p>Complete documentation available in the <code>docs/</code> folder.</p>
+
+            <h2>🔗 Links</h2>
+            <ul>
+              <li><a href="https://www.npmjs.com/package/devtunnel-cli">npm Package</a></li>
+              <li><a href="https://devtunnel.vercel.app">Official Website</a></li>
+              <li><a href="https://github.com/maiz-an/DevTunnel">GitHub Repository</a></li>
+              <li><a href="https://github.com/maiz-an/DevTunnel/issues">Report Issues</a></li>
+            </ul>
+
+            <hr>
+            <p><small>Version 3.0.6 | Made with ❤️ for developers worldwide</small></p>
+          </body>
+          </html>
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
