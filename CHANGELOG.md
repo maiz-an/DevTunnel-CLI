@@ -2,6 +2,22 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.7] - 2026-01-28
+
+### Added
+- **Streaming Support** - Enhanced proxy server with better support for video/audio file streaming
+- **Timeout Handling** - Increased timeout to 5 minutes for large file transfers
+- **File Streaming Documentation** - Added comprehensive documentation about file size limitations
+
+### Changed
+- **Proxy Server** - Improved timeout handling and streaming support for large files
+- **Features Documentation** - Added limitations section explaining Cloudflare free tier constraints
+- **README** - Added streaming support to features list
+
+### Fixed
+- **Large File Streaming** - Better handling of video/audio files with proper timeout configuration
+- **Stream Cancellation Errors** - Improved error handling for interrupted streams
+
 ## [3.0.6] - 2026-01-28
 
 ### Changed
