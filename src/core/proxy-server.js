@@ -52,6 +52,7 @@ server.on("upgrade", (req, socket, head) => {
 
 // Start server
 server.listen(PROXY_PORT, () => {
+  console.log("");
   console.log("DevTunnel Proxy Server");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log(`Project: ${PROJECT_NAME}`);
@@ -59,7 +60,8 @@ server.listen(PROXY_PORT, () => {
   console.log(`Proxy Port: ${PROXY_PORT}`);
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("Ready! Tunnel will connect to proxy");
-  console.log("No config changes needed\n");
+  console.log("No config changes needed");
+  console.log("");
 });
 
 // Handle shutdown

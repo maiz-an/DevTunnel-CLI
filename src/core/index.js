@@ -28,12 +28,15 @@ if (!PORT || isNaN(PORT) || PORT < 1 || PORT > 65535) {
 let tunnelProcess;
 let currentTunnelType = null;
 
+console.log("");
 console.log("DevTunnel Tunnel Service");
 console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 console.log(`Project: ${PROJECT_NAME}`);
 console.log(`Port: ${PORT}`);
-console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
-console.log("Ensure dev server is running on port " + PORT + "\n");
+console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+console.log("");
+console.log("Ensure dev server is running on port " + PORT);
+console.log("");
 
 // Check if project is Vite and auto-fix config for Cloudflare
 async function fixViteConfigForCloudflare() {
@@ -176,7 +179,9 @@ const TUNNEL_SERVICES = [
 
 // Try each tunnel service
 async function tryTunnelServices() {
-  console.log("Checking available tunnel services...\n");
+  console.log("");
+  console.log("Checking available tunnel services...");
+  console.log("");
 
   let hasCloudflare = false;
   
@@ -207,7 +212,8 @@ async function tryTunnelServices() {
       
       // Skip Vite auto-fix - using proxy server instead
       
-      console.log(`Starting ${service.name} tunnel...\n`);
+      console.log(`Starting ${service.name} tunnel...`);
+      console.log("");
       
       currentTunnelType = service.name;
       tunnelProcess = spawn(service.command, service.args, {
@@ -227,7 +233,8 @@ async function tryTunnelServices() {
           console.log("Note: First-time visitors need to enter tunnel password (your public IP)");
           console.log("Get password at: https://loca.lt/mytunnelpassword\n");
         }
-        console.log("Press Ctrl+C to stop the tunnel\n");
+        console.log("Press Ctrl+C to stop the tunnel");
+        console.log("");
         return true;
       }
     } else {
@@ -263,11 +270,13 @@ function setupTunnelHandlers(serviceName) {
           const urlMatch = trimmed.match(/(https?:\/\/[^\s]+trycloudflare\.com[^\s]*)/);
           if (urlMatch) {
             const url = urlMatch[1];
-            console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            console.log("");
+            console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             console.log("PUBLIC URL:");
             console.log(url);
             console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            console.log("Share this URL with anyone!\n");
+            console.log("Share this URL with anyone!");
+            console.log("");
           }
         }
         // Show other important messages (but filter out most INF/WRN logs)
@@ -277,10 +286,12 @@ function setupTunnelHandlers(serviceName) {
       } else if (serviceName === "Ngrok") {
         if (trimmed.includes("https://") || trimmed.includes("http://")) {
           const url = trimmed;
-          console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+          console.log("");
+          console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
           console.log("PUBLIC URL:");
           console.log(url);
-          console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+          console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+          console.log("");
         }
       } else {
         // LocalTunnel or other services
@@ -288,10 +299,12 @@ function setupTunnelHandlers(serviceName) {
           const urlMatch = trimmed.match(/https?:\/\/[^\s]+/);
           if (urlMatch) {
             const url = urlMatch[0];
-            console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            console.log("");
+            console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             console.log("PUBLIC URL:");
             console.log(url);
-            console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+            console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            console.log("");
           }
         }
       }
@@ -306,11 +319,13 @@ function setupTunnelHandlers(serviceName) {
       const urlMatch = output.match(/(https?:\/\/[^\s]+trycloudflare\.com[^\s]*)/);
       if (urlMatch) {
         const url = urlMatch[1];
-        console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+        console.log("");
+        console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         console.log("PUBLIC URL:");
         console.log(url);
         console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        console.log("Share this URL with anyone!\n");
+        console.log("Share this URL with anyone!");
+        console.log("");
       }
     }
     

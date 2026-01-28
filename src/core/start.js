@@ -38,16 +38,17 @@ async function commandExists(command) {
 // ASCII Logo - Compatible with all OS and terminals
 function showLogo() {
   console.log("");
-  console.log("                                                                                          ");
-  console.log(" ▄▄▄▄▄                         ▄▄▄▄▄▄▄▄                                          ▄▄▄▄     ");
-  console.log(" ██▀▀▀██                       ▀▀▀██▀▀▀                                          ▀▀██     ");
-  console.log(" ██    ██   ▄████▄   ██▄  ▄██     ██     ██    ██  ██▄████▄  ██▄████▄   ▄████▄     ██     ");
-  console.log(" ██    ██  ██▄▄▄▄██   ██  ██      ██     ██    ██  ██▀   ██  ██▀   ██  ██▄▄▄▄██    ██     ");
-  console.log(" ██    ██  ██▀▀▀▀▀▀   ▀█▄▄█▀      ██     ██    ██  ██    ██  ██    ██  ██▀▀▀▀▀▀    ██     ");
-  console.log(" ██▄▄▄██   ▀██▄▄▄▄█    ████       ██     ██▄▄▄███  ██    ██  ██    ██  ▀██▄▄▄▄█    ██▄▄▄  ");
-  console.log(" ▀▀▀▀▀       ▀▀▀▀▀      ▀▀        ▀▀      ▀▀▀▀ ▀▀  ▀▀    ▀▀  ▀▀    ▀▀    ▀▀▀▀▀      ▀▀▀▀  ");
-  console.log("                                                                                          ");
-  console.log("                                                                                          ");
+  console.log(" ██████████                        ███████████                                           ████ ");
+  console.log("▒▒███▒▒▒▒███                      ▒█▒▒▒███▒▒▒█                                          ▒▒███ ");
+  console.log(" ▒███   ▒▒███  ██████  █████ █████▒   ▒███  ▒  █████ ████ ████████   ████████    ██████  ▒███ ");
+  console.log(" ▒███    ▒███ ███▒▒███▒▒███ ▒▒███     ▒███    ▒▒███ ▒███ ▒▒███▒▒███ ▒▒███▒▒███  ███▒▒███ ▒███ ");
+  console.log(" ▒███    ▒███▒███████  ▒███  ▒███     ▒███     ▒███ ▒███  ▒███ ▒███  ▒███ ▒███ ▒███████  ▒███ ");
+  console.log(" ▒███    ███ ▒███▒▒▒   ▒▒███ ███      ▒███     ▒███ ▒███  ▒███ ▒███  ▒███ ▒███ ▒███▒▒▒   ▒███ ");
+  console.log(" ██████████  ▒▒██████   ▒▒█████       █████    ▒▒████████ ████ █████ ████ █████▒▒██████  █████");
+  console.log("▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒     ▒▒▒▒▒       ▒▒▒▒▒      ▒▒▒▒▒▒▒▒ ▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒ ▒▒▒▒▒  ▒▒▒▒▒▒  ▒▒▒▒▒ ");
+  console.log("                                                                                              ");
+  console.log("                                                                                              ");
+  console.log("");
 }
 
 // Main function
@@ -60,13 +61,15 @@ async function main() {
   // Show ASCII logo
   showLogo();
   
-  console.log("DevTunnel v3.0.5");
+  console.log("DevTunnel v3.0.6");
   console.log("Share your local dev servers worldwide");
+  console.log("");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("Developer: maiz");
   console.log("Repository: https://github.com/maiz-an/DevTunnel");
   console.log("Website: https://devtunnel.vercel.app");
-  console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+  console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+  console.log("");
 
   // Step 1: Check Node.js
   console.log("[1/4] Checking Node.js...");
@@ -75,7 +78,8 @@ async function main() {
     console.log("Install from: https://nodejs.org/");
     process.exit(1);
   }
-  console.log("SUCCESS: Node.js installed\n");
+  console.log("SUCCESS: Node.js installed");
+  console.log("");
 
   // Step 2: Check Cloudflare (bundled or system-installed)
   console.log("[2/4] Checking Cloudflare...");
@@ -93,7 +97,8 @@ async function main() {
     cloudflareAvailable = true;
   } else {
     console.log("First time setup - Downloading Cloudflare...");
-    console.log("This only happens once (~40MB, 10-30 seconds)\n");
+    console.log("This only happens once (~40MB, 10-30 seconds)");
+    console.log("");
     
     try {
       const bundledPath = await setupCloudflared();
@@ -103,11 +108,13 @@ async function main() {
         cloudflareAvailable = true;
       } else {
         console.log("Could not download Cloudflare");
-        console.log("Will use alternative tunnel services\n");
+        console.log("Will use alternative tunnel services");
+        console.log("");
       }
     } catch (err) {
       console.log(`Setup error: ${err.message}`);
-      console.log("Will use alternative tunnel services\n");
+      console.log("Will use alternative tunnel services");
+      console.log("");
     }
   }
   
@@ -124,14 +131,17 @@ async function main() {
   console.log("[3/4] Checking dependencies...");
   const nodeModulesPath = join(PROJECT_ROOT, "node_modules");
   if (!existsSync(nodeModulesPath)) {
-    console.log("Installing dependencies...\n");
+    console.log("Installing dependencies...");
+    console.log("");
     // Run npm install in the project root directory
     const result = await runCommand("npm", ["install"], PROJECT_ROOT);
     if (result.code !== 0) {
-      console.log("\nERROR: npm install failed");
+      console.log("");
+      console.log("ERROR: npm install failed");
       process.exit(1);
     }
-    console.log("\nSUCCESS: Dependencies installed");
+    console.log("");
+    console.log("SUCCESS: Dependencies installed");
   } else {
     console.log("SUCCESS: Dependencies already installed");
   }
@@ -139,7 +149,8 @@ async function main() {
 
   // Step 4: Select folder using native OS dialog
   console.log("[4/4] Select your project folder...");
-  console.log("Opening folder picker...\n");
+  console.log("Opening folder picker...");
+  console.log("");
   
   const projectPath = await selectFolder();
   
@@ -149,7 +160,8 @@ async function main() {
   }
   
   const projectName = basename(projectPath);
-  console.log(`Selected: ${projectPath}\n`);
+  console.log(`Selected: ${projectPath}`);
+  console.log("");
 
   // Get port
   const portResponse = await prompts({
@@ -167,15 +179,18 @@ async function main() {
   const devPort = portResponse.port;
   const proxyPort = devPort + 1000; // Use port 1000 higher for proxy
 
-  console.log("\nConfiguration:");
+  console.log("");
+  console.log("Configuration:");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log(`Project: ${projectName}`);
   console.log(`Dev Server: localhost:${devPort}`);
   console.log(`Proxy Port: ${proxyPort}`);
-  console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+  console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+  console.log("");
 
   // Start proxy server
-  console.log("Starting services...\n");
+  console.log("Starting services...");
+  console.log("");
   const proxyPath = join(__dirname, "proxy-server.js");
   const proxyProcess = spawn("node", [proxyPath, devPort.toString(), proxyPort.toString(), projectName], {
     stdio: "inherit",

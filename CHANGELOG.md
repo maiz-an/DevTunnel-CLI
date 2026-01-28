@@ -2,6 +2,13 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.6] - 2026-01-28
+
+### Changed
+- **Updated ASCII Logo** - Replaced with exact logo design using █ and ▒ characters
+- **Improved UI Spacing** - Added proper spacing around lines and sections for better readability
+- **Better Visual Hierarchy** - Cleaner output with consistent spacing throughout
+
 ## [3.0.5] - 2026-01-28
 
 ### Changed
