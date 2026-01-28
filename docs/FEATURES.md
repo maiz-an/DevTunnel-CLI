@@ -92,16 +92,18 @@ Output:
 
 ### 🎯 Framework Agnostic
 
-Works with ANY framework:
-- ✅ Vite
-- ✅ React
-- ✅ Next.js
-- ✅ NestJS
-- ✅ Express
-- ✅ FastAPI (Python)
-- ✅ Flask (Python)
-- ✅ Django (Python)
-- ✅ Any HTTP server!
+Works with ANY framework and backend:
+- ✅ **Frontend:** Vite, React, Vue, Next.js, Angular, Svelte
+- ✅ **Backend:** Express, NestJS, Fastify, Koa, Hapi
+- ✅ **Python:** FastAPI, Flask, Django, Tornado
+- ✅ **Java:** Spring Boot, Tomcat, Jetty
+- ✅ **PHP:** Laravel, Symfony, WordPress
+- ✅ **Go:** Gin, Echo, Fiber
+- ✅ **Ruby:** Rails, Sinatra
+- ✅ **Rust:** Actix, Rocket
+- ✅ **Any HTTP/HTTPS server on any port!**
+- ✅ **REST APIs, GraphQL APIs, WebSocket servers**
+- ✅ **Microservices, monoliths, serverless functions**
 
 ---
 

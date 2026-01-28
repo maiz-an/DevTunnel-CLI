@@ -95,7 +95,7 @@ cd my-react-app
 devtunnel
 ```
 
-**Works with any command:** Vite, Create React App, Next.js, Express, NestJS, etc.
+**Works with any framework, API, or backend:** Vite, React, Next.js, Express, NestJS, FastAPI, Flask, Django, Spring Boot, Laravel, and any HTTP/HTTPS server!
 
 ---
 
