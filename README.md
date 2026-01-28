@@ -36,8 +36,8 @@ npm start
 - 🎯 **Zero Config** - No project changes needed
 - 🔗 **Smart Proxy** - Bypasses Vite/React restrictions
 - 🌍 **Cross-Platform** - Windows, macOS, Linux
-- 📝 **Custom Branding** - Add your name
 - 🚀 **Any Framework** - Works with all
+- 🔄 **Multi-Service** - Cloudflare, Ngrok, LocalTunnel fallback
 
 ---
 
@@ -50,15 +50,6 @@ npm start
 5. Get your public URL and share it! 🌍
 
 **Works with any command:** Vite, Create React App, Next.js, Express, NestJS, etc.
-
----
-
-## 🎨 Custom Branding
-
-Edit `src/config/config.js`:
-```javascript
-export const YOUR_NAME = "Your Name";
-```
 
 ---
 

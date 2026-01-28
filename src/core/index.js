@@ -16,18 +16,7 @@ const PROJECT_PATH = process.argv[4] || process.cwd();
 // Import bundled cloudflared helpers
 const { getBinaryPath, hasBundledCloudflared } = await import("./setup-cloudflared.js");
 
-// Load custom name from config
-let customPrefix = "";
-try {
-  const configModule = await import("../config/config.js");
-  if (configModule.YOUR_NAME && configModule.YOUR_NAME.trim()) {
-    customPrefix = configModule.YOUR_NAME.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-');
-    console.log(`🎨 Using custom prefix: "${customPrefix}"\n`);
-    console.log(`💡 URLs will look like: ${customPrefix}-xyz.trycloudflare.com\n`);
-  }
-} catch (error) {
-  // Config not found or invalid, use random
-}
+// No custom prefix - Cloudflare generates random URLs
 
 if (!PORT || isNaN(PORT) || PORT < 1 || PORT > 65535) {
   console.error("❌ Invalid port number!");
@@ -280,27 +269,16 @@ function setupTunnelHandlers(serviceName) {
             const boxWidth = Math.max(minWidth, urlLength);
             
             console.log("\n╔" + "═".repeat(boxWidth) + "╗");
-            if (customPrefix) {
-              const headerText = `✅ PUBLIC URL (Created by: ${customPrefix})`;
-              const headerPadding = boxWidth - headerText.length;
-              console.log("║ " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
-            } else {
-              const headerText = "✅ PUBLIC URL";
-              const headerPadding = boxWidth - headerText.length;
-              console.log("║ " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
-            }
+            const headerText = "✅ PUBLIC URL";
+            const headerPadding = boxWidth - headerText.length;
+            console.log("║ " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
             console.log("╠" + "═".repeat(boxWidth) + "╣");
             const urlPadding = boxWidth - url.length;
             console.log("║ " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
-            if (customPrefix) {
-              console.log("╠" + "═".repeat(boxWidth) + "╣");
-              const creatorText = `👤 Creator: ${customPrefix}`;
-              const creatorPadding = boxWidth - creatorText.length;
-              console.log("║ " + creatorText + " ".repeat(Math.max(0, creatorPadding)) + "║");
-              const shareText = "💡 Share this URL with your team!";
-              const sharePadding = boxWidth - shareText.length;
-              console.log("║ " + shareText + " ".repeat(Math.max(0, sharePadding)) + "║");
-            }
+            console.log("╠" + "═".repeat(boxWidth) + "╣");
+            const shareText = "💡 Share this URL with anyone!";
+            const sharePadding = boxWidth - shareText.length;
+            console.log("║ " + shareText + " ".repeat(Math.max(0, sharePadding)) + "║");
             console.log("╚" + "═".repeat(boxWidth) + "╝\n");
           }
         }
