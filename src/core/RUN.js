@@ -16,7 +16,7 @@ console.log(`📍 Platform detected: ${platform()}\n`);
 const startPath = join(__dirname, "src", "core", "start.js");
 const child = spawn("node", [startPath], {
   stdio: "inherit",
-  shell: true
+  shell: false
 });
 
 child.on("error", (error) => {

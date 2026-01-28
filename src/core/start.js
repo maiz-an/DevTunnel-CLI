@@ -8,10 +8,17 @@ import { selectFolder } from "../utils/folder-picker.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Get project root directory dynamically (two levels up from src/core/)
+const PROJECT_ROOT = dirname(dirname(__dirname));
+
 // Helper to run command
-function runCommand(command, args = []) {
+function runCommand(command, args = [], cwd = process.cwd()) {
   return new Promise((resolve) => {
-    const proc = spawn(command, args, { shell: true, stdio: "pipe" });
+    const proc = spawn(command, args, { 
+      shell: true, 
+      stdio: "pipe",
+      cwd: cwd
+    });
     let output = "";
     
     proc.stdout?.on("data", (data) => output += data.toString());
@@ -93,9 +100,11 @@ async function main() {
 
   // Step 3: Check dependencies
   console.log("[3/4] Checking dependencies...");
-  if (!existsSync(join(__dirname, "node_modules"))) {
+  const nodeModulesPath = join(PROJECT_ROOT, "node_modules");
+  if (!existsSync(nodeModulesPath)) {
     console.log("📦 Installing dependencies...\n");
-    const result = await runCommand("npm", ["install"]);
+    // Run npm install in the project root directory
+    const result = await runCommand("npm", ["install"], PROJECT_ROOT);
     if (result.code !== 0) {
       console.log("\n❌ ERROR: npm install failed");
       process.exit(1);
@@ -149,17 +158,18 @@ async function main() {
   const proxyPath = join(__dirname, "proxy-server.js");
   const proxyProcess = spawn("node", [proxyPath, devPort.toString(), proxyPort.toString(), projectName], {
     stdio: "inherit",
-    shell: true
+    shell: false
   });
 
   // Wait for proxy to start
   await new Promise(resolve => setTimeout(resolve, 2000));
 
   // Run main tunnel app (connects to proxy port)
+  // Use shell: false to properly handle paths with spaces
   const indexPath = join(__dirname, "index.js");
   const tunnelProcess = spawn("node", [indexPath, proxyPort.toString(), projectName, projectPath], {
     stdio: "inherit",
-    shell: true
+    shell: false
   });
 
   // Handle cleanup
