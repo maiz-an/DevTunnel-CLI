@@ -1,8 +1,12 @@
-const { spawn } = require('child_process');
-const fs = require('fs');
-const path = require('path');
-const https = require('https');
-const os = require('os');
+import { spawn } from 'child_process';
+import fs from 'fs';
+import path from 'path';
+import https from 'https';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const BIN_DIR = path.join(__dirname, '../../bin');
 const CLOUDFLARED_VERSION = '2024.8.2'; // Latest stable version
@@ -14,7 +18,7 @@ const DOWNLOAD_URLS = {
   linux: `https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED_VERSION}/cloudflared-linux-amd64`
 };
 
-function getBinaryPath() {
+export function getBinaryPath() {
   const platform = process.platform;
   const binName = platform === 'win32' ? 'cloudflared.exe' : 'cloudflared';
   return path.join(BIN_DIR, platform, binName);
@@ -75,7 +79,7 @@ function downloadFile(url, dest) {
   });
 }
 
-async function setupCloudflared() {
+export async function setupCloudflared() {
   const platform = process.platform;
   const binaryPath = getBinaryPath();
   
@@ -104,18 +108,7 @@ async function setupCloudflared() {
 }
 
 // Check if bundled cloudflared exists and is working
-function hasBundledCloudflared() {
+export function hasBundledCloudflared() {
   const binaryPath = getBinaryPath();
   return fs.existsSync(binaryPath);
-}
-
-module.exports = {
-  setupCloudflared,
-  getBinaryPath,
-  hasBundledCloudflared
-};
-
-// Run setup if called directly
-if (require.main === module) {
-  setupCloudflared().catch(console.error);
 }

@@ -13,6 +13,9 @@ const PORT = parseInt(process.argv[2]);
 const PROJECT_NAME = process.argv[3] || `Project (Port ${PORT})`;
 const PROJECT_PATH = process.argv[4] || process.cwd();
 
+// Import bundled cloudflared helpers
+const { getBinaryPath, hasBundledCloudflared } = await import("./setup-cloudflared.js");
+
 // Load custom name from config
 let customPrefix = "";
 try {
@@ -122,15 +125,23 @@ async function fixViteConfigForCloudflare() {
   }
 }
 
+// Get cloudflared command (bundled or system)
+function getCloudflaredCommand() {
+  return hasBundledCloudflared() ? getBinaryPath() : "cloudflared";
+}
+
 // Tunnel services to try in order (Cloudflare first - no password, fast)
 const TUNNEL_SERVICES = [
   {
     name: "Cloudflare",
-    command: "cloudflared",
+    get command() {
+      return getCloudflaredCommand();
+    },
     args: ["tunnel", "--url", `http://localhost:${PORT}`],
     available: async () => {
       try {
-        const result = spawn("cloudflared", ["--version"], { shell: true, stdio: "pipe" });
+        const cmd = getCloudflaredCommand();
+        const result = spawn(cmd, ["--version"], { shell: true, stdio: "pipe" });
         return new Promise((resolve) => {
           result.on("close", (code) => resolve(code === 0));
           result.on("error", () => resolve(false));

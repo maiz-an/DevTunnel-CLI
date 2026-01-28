@@ -48,28 +48,42 @@ async function main() {
   }
   console.log("✅ SUCCESS: Node.js installed\n");
 
-  // Step 2: Check Cloudflare (Windows only auto-install)
+  // Step 2: Check Cloudflare (bundled or system-installed)
   console.log("[2/4] Checking Cloudflare...");
-  if (!await commandExists("cloudflared")) {
-    const platform = process.platform;
-    if (platform === "win32") {
-      console.log("⚡ Installing Cloudflare...");
-      const result = await runCommand("winget", [
-        "install", "--id", "Cloudflare.cloudflared",
-        "--silent", "--accept-source-agreements", "--accept-package-agreements"
-      ]);
-      
-      if (result.code === 0) {
-        console.log("✅ SUCCESS: Cloudflare installed");
-      } else {
-        console.log("⚠️  WARNING: Cloudflare install failed (will use fallback)");
-      }
-    } else {
-      console.log("⚠️  Cloudflare not found (will use fallback tunnels)");
-      console.log("💡 Install: brew install cloudflare/cloudflare/cloudflared (Mac)");
-    }
+  
+  // Import bundled cloudflared helpers
+  const { setupCloudflared, hasBundledCloudflared } = await import("./setup-cloudflared.js");
+  
+  if (hasBundledCloudflared()) {
+    console.log("✅ SUCCESS: Using bundled Cloudflare (no install needed)");
+  } else if (await commandExists("cloudflared")) {
+    console.log("✅ SUCCESS: Cloudflare already installed on system");
   } else {
-    console.log("✅ SUCCESS: Cloudflare already installed");
+    console.log("📦 Bundling Cloudflare (first time setup)...");
+    const bundledPath = await setupCloudflared();
+    
+    if (bundledPath) {
+      console.log("✅ SUCCESS: Cloudflare bundled and ready");
+    } else {
+      // Fallback to system installation
+      const platform = process.platform;
+      if (platform === "win32") {
+        console.log("⚡ Installing Cloudflare via winget...");
+        const result = await runCommand("winget", [
+          "install", "--id", "Cloudflare.cloudflared",
+          "--silent", "--accept-source-agreements", "--accept-package-agreements"
+        ]);
+        
+        if (result.code === 0) {
+          console.log("✅ SUCCESS: Cloudflare installed");
+        } else {
+          console.log("⚠️  WARNING: Cloudflare install failed (will use fallback)");
+        }
+      } else {
+        console.log("⚠️  Cloudflare not found (will use fallback tunnels)");
+        console.log("💡 Install: brew install cloudflare/cloudflare/cloudflared (Mac)");
+      }
+    }
   }
   console.log("");
 
