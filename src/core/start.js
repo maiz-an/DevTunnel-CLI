@@ -31,13 +31,13 @@ async function commandExists(command) {
 // Main function
 async function main() {
   console.clear();
-  console.log("\n╔════════════════════════════════════════╗");
-  console.log("║                                        ║");
-  console.log("║          🚀 DevTunnel v3.0            ║");
-  console.log("║                                        ║");
-  console.log("║   Share local servers worldwide       ║");
-  console.log("║                                        ║");
-  console.log("╚════════════════════════════════════════╝\n");
+  console.log("\n╔════════════════════════════════════════════╗");
+  console.log("║                                            ║");
+  console.log("║           🚀 DevTunnel v3.0               ║");
+  console.log("║                                            ║");
+  console.log("║      Share local servers worldwide         ║");
+  console.log("║                                            ║");
+  console.log("╚════════════════════════════════════════════╝\n");
 
   // Step 1: Check Node.js
   console.log("[1/4] Checking Node.js...");
@@ -136,13 +136,13 @@ async function main() {
   const devPort = portResponse.port;
   const proxyPort = devPort + 1000; // Use port 1000 higher for proxy
 
-  console.log("\n┌────────────────────────────────────────┐");
-  console.log("│  🔧 Configuration                      │");
-  console.log("├────────────────────────────────────────┤");
-  console.log(`│  📦 Project: ${projectName.padEnd(24)} │`);
-  console.log(`│  🎯 Dev Server: localhost:${devPort.toString().padEnd(12)} │`);
-  console.log(`│  🔌 Proxy Port: ${proxyPort.toString().padEnd(24)} │`);
-  console.log("└────────────────────────────────────────┘\n");
+  console.log("\n╔════════════════════════════════════════════╗");
+  console.log("║           🔧 Configuration                ║");
+  console.log("╠════════════════════════════════════════════╣");
+  console.log(`║  📦 Project: ${projectName.padEnd(28)} ║`);
+  console.log(`║  🎯 Dev Server: localhost:${devPort.toString().padEnd(17)} ║`);
+  console.log(`║  🔌 Proxy Port: ${proxyPort.toString().padEnd(28)} ║`);
+  console.log("╚════════════════════════════════════════════╝\n");
 
   // Start proxy server
   console.log("⚡ Starting services...\n");

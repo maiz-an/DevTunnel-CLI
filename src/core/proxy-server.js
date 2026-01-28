@@ -52,16 +52,16 @@ server.on("upgrade", (req, socket, head) => {
 
 // Start server
 server.listen(PROXY_PORT, () => {
-  console.log("╔══════════════════════════════════════════════════════════╗");
-  console.log("║          🔗 DevTunnel Proxy Server                      ║");
-  console.log("╠══════════════════════════════════════════════════════════╣");
-  console.log(`║  📦 Project: ${PROJECT_NAME.padEnd(42)} ║`);
-  console.log(`║  🎯 Dev Server: http://localhost:${TARGET_PORT.toString().padEnd(17)} ║`);
-  console.log(`║  🔌 Proxy Port: ${PROXY_PORT.toString().padEnd(42)} ║`);
-  console.log("╠══════════════════════════════════════════════════════════╣");
-  console.log("║  ✅ Ready! Tunnel will connect to proxy                 ║");
-  console.log("║  💡 No config changes needed in your project            ║");
-  console.log("╚══════════════════════════════════════════════════════════╝\n");
+  console.log("╔════════════════════════════════════════════╗");
+  console.log("║       🔗 DevTunnel Proxy Server           ║");
+  console.log("╠════════════════════════════════════════════╣");
+  console.log(`║  📦 Project: ${PROJECT_NAME.padEnd(28)} ║`);
+  console.log(`║  🎯 Dev Server: http://localhost:${TARGET_PORT.toString().padEnd(7)} ║`);
+  console.log(`║  🔌 Proxy Port: ${PROXY_PORT.toString().padEnd(28)} ║`);
+  console.log("╠════════════════════════════════════════════╣");
+  console.log("║  ✅ Ready! Tunnel will connect to proxy   ║");
+  console.log("║  💡 No config changes needed              ║");
+  console.log("╚════════════════════════════════════════════╝\n");
 });
 
 // Handle shutdown

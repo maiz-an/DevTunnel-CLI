@@ -39,12 +39,12 @@ if (!PORT || isNaN(PORT) || PORT < 1 || PORT > 65535) {
 let tunnelProcess;
 let currentTunnelType = null;
 
-console.log("╔════════════════════════════════════════╗");
-console.log("║          🌐 DevTunnel v3.0            ║");
-console.log("╠════════════════════════════════════════╣");
-console.log(`║  📦 ${PROJECT_NAME.padEnd(34)} ║`);
-console.log(`║  🔌 Port: ${PORT.toString().padEnd(30)} ║`);
-console.log("╚════════════════════════════════════════╝\n");
+console.log("╔════════════════════════════════════════════╗");
+console.log("║           🌐 DevTunnel v3.0               ║");
+console.log("╠════════════════════════════════════════════╣");
+console.log(`║  📦 ${PROJECT_NAME.padEnd(38)} ║`);
+console.log(`║  🔌 Port: ${PORT.toString().padEnd(34)} ║`);
+console.log("╚════════════════════════════════════════════╝\n");
 console.log("💡 Ensure dev server is running on port " + PORT + "\n");
 
 // Check if project is Vite and auto-fix config for Cloudflare
@@ -275,29 +275,31 @@ function setupTunnelHandlers(serviceName) {
           const urlMatch = trimmed.match(/(https?:\/\/[^\s]+trycloudflare\.com[^\s]*)/);
           if (urlMatch) {
             const url = urlMatch[1];
-            const boxWidth = Math.max(60, url.length + 4);
-            const urlPadding = boxWidth - 4 - url.length;
+            const minWidth = 60;
+            const urlLength = url.length + 4; // 2 spaces on each side + "║"
+            const boxWidth = Math.max(minWidth, urlLength);
             
             console.log("\n╔" + "═".repeat(boxWidth) + "╗");
             if (customPrefix) {
               const headerText = `✅ PUBLIC URL (Created by: ${customPrefix})`;
-              const headerPadding = boxWidth - 2 - headerText.length;
-              console.log("║  " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
+              const headerPadding = boxWidth - headerText.length;
+              console.log("║ " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
             } else {
               const headerText = "✅ PUBLIC URL";
-              const headerPadding = boxWidth - 2 - headerText.length;
-              console.log("║  " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
+              const headerPadding = boxWidth - headerText.length;
+              console.log("║ " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
             }
             console.log("╠" + "═".repeat(boxWidth) + "╣");
-            console.log("║  " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
+            const urlPadding = boxWidth - url.length;
+            console.log("║ " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
             if (customPrefix) {
-              console.log("╠" + "─".repeat(boxWidth) + "╣");
+              console.log("╠" + "═".repeat(boxWidth) + "╣");
               const creatorText = `👤 Creator: ${customPrefix}`;
-              const creatorPadding = boxWidth - 2 - creatorText.length;
-              console.log("║  " + creatorText + " ".repeat(Math.max(0, creatorPadding)) + "║");
+              const creatorPadding = boxWidth - creatorText.length;
+              console.log("║ " + creatorText + " ".repeat(Math.max(0, creatorPadding)) + "║");
               const shareText = "💡 Share this URL with your team!";
-              const sharePadding = boxWidth - 2 - shareText.length;
-              console.log("║  " + shareText + " ".repeat(Math.max(0, sharePadding)) + "║");
+              const sharePadding = boxWidth - shareText.length;
+              console.log("║ " + shareText + " ".repeat(Math.max(0, sharePadding)) + "║");
             }
             console.log("╚" + "═".repeat(boxWidth) + "╝\n");
           }
@@ -309,15 +311,17 @@ function setupTunnelHandlers(serviceName) {
       } else if (serviceName === "Ngrok") {
         if (trimmed.includes("https://") || trimmed.includes("http://")) {
           const url = trimmed;
-          const boxWidth = Math.max(60, url.length + 4);
-          const urlPadding = boxWidth - 4 - url.length;
+          const minWidth = 60;
+          const urlLength = url.length + 4;
+          const boxWidth = Math.max(minWidth, urlLength);
           
           console.log("\n╔" + "═".repeat(boxWidth) + "╗");
           const headerText = "✅ PUBLIC URL";
-          const headerPadding = boxWidth - 2 - headerText.length;
-          console.log("║  " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
+          const headerPadding = boxWidth - headerText.length;
+          console.log("║ " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
           console.log("╠" + "═".repeat(boxWidth) + "╣");
-          console.log("║  " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
+          const urlPadding = boxWidth - url.length;
+          console.log("║ " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
           console.log("╚" + "═".repeat(boxWidth) + "╝\n");
         }
       } else {
@@ -326,15 +330,17 @@ function setupTunnelHandlers(serviceName) {
           const urlMatch = trimmed.match(/https?:\/\/[^\s]+/);
           if (urlMatch) {
             const url = urlMatch[0];
-            const boxWidth = Math.max(60, url.length + 4);
-            const urlPadding = boxWidth - 4 - url.length;
+            const minWidth = 60;
+            const urlLength = url.length + 4;
+            const boxWidth = Math.max(minWidth, urlLength);
             
             console.log("\n╔" + "═".repeat(boxWidth) + "╗");
             const headerText = "✅ PUBLIC URL";
-            const headerPadding = boxWidth - 2 - headerText.length;
-            console.log("║  " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
+            const headerPadding = boxWidth - headerText.length;
+            console.log("║ " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
             console.log("╠" + "═".repeat(boxWidth) + "╣");
-            console.log("║  " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
+            const urlPadding = boxWidth - url.length;
+            console.log("║ " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
             console.log("╚" + "═".repeat(boxWidth) + "╝\n");
           }
         }
@@ -349,10 +355,19 @@ function setupTunnelHandlers(serviceName) {
     if (serviceName === "Cloudflare" && output.includes("trycloudflare.com")) {
       const urlMatch = output.match(/(https?:\/\/[^\s]+trycloudflare\.com[^\s]*)/);
       if (urlMatch) {
-        console.log("\n" + "=".repeat(50));
-        console.log("✅ PUBLIC URL:");
-        console.log(`   ${urlMatch[1]}`);
-        console.log("=".repeat(50) + "\n");
+        const url = urlMatch[1];
+        const minWidth = 60;
+        const urlLength = url.length + 4;
+        const boxWidth = Math.max(minWidth, urlLength);
+        
+        console.log("\n╔" + "═".repeat(boxWidth) + "╗");
+        const headerText = "✅ PUBLIC URL";
+        const headerPadding = boxWidth - headerText.length;
+        console.log("║ " + headerText + " ".repeat(Math.max(0, headerPadding)) + "║");
+        console.log("╠" + "═".repeat(boxWidth) + "╣");
+        const urlPadding = boxWidth - url.length;
+        console.log("║ " + url + " ".repeat(Math.max(0, urlPadding)) + "║");
+        console.log("╚" + "═".repeat(boxWidth) + "╝\n");
       }
     }
     
