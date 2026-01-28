@@ -2,6 +2,11 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.14] - 2026-01-28
+
+### Fixed
+- **Privilege Elevation** - Fixed automatic admin privilege request implementation
+
 ## [3.0.13] - 2026-01-28
 
 ### Added

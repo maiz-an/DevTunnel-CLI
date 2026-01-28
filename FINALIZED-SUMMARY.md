@@ -1,8 +1,8 @@
-# ✅ DevTunnel - Fully Finalized (v3.0.13)
+# ✅ DevTunnel - Fully Finalized (v3.0.14)
 
 **Date:** January 28, 2026  
 **Status:** Production Ready  
-**Latest Version:** 3.0.13 (automatic privilege elevation, npm-only installation, auto-detection, and streaming support)
+**Latest Version:** 3.0.14 (automatic privilege elevation, npm-only installation, auto-detection, and streaming support)
 
 ---
 
@@ -207,6 +207,6 @@ devtunnel    # Auto-detects project and port!
 
 ---
 
-**DevTunnel v3.0.13 - Production Ready! 🚀**
+**DevTunnel v3.0.14 - Production Ready! 🚀**
 
 **Made with ❤️ for developers worldwide**
