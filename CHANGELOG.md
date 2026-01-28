@@ -2,6 +2,13 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.3] - 2026-01-28
+
+### Added
+- **ASCII Logo** - Professional ASCII art logo displayed at startup
+- **Improved Screen Clearing** - Better terminal clearing for fresh start on all platforms
+- **Fullscreen Support** - Clears screen and positions cursor at top for clean display
+
 ## [3.0.2] - 2026-01-28
 
 ### Changed
