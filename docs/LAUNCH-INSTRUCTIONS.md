@@ -35,11 +35,32 @@ chmod +x START.sh
 
 ## 📦 Method 2: Install via npm (Recommended)
 
-**Works on ALL platforms:**
+**Step-by-Step:**
+
+1. **Install DevTunnel (one-time):**
 ```bash
 npm install -g devtunnel-cli
-devtunnel
 ```
+
+2. **Go to your project directory:**
+```bash
+cd your-project
+```
+
+3. **Start your dev server (Terminal 1):**
+```bash
+npm start
+# OR
+npm run dev
+```
+
+4. **Run DevTunnel (Terminal 2 - same directory!):**
+```bash
+cd your-project  # Same directory where you run npm start
+devtunnel        # Auto-detects project and port!
+```
+
+**Important:** Run `devtunnel` from the same directory where you run `npm start` or `npm run dev`!
 
 ## 📦 Method 3: Universal Node Launcher (if downloaded)
 

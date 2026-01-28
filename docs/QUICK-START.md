@@ -25,9 +25,30 @@ chmod +x START.sh
 ---
 
 ## 📦 Alternative - Install via npm (all platforms):
+
+**Step-by-Step:**
+
+1. **Install DevTunnel (one-time):**
 ```bash
 npm install -g devtunnel-cli
-devtunnel
+```
+
+2. **Go to your project directory:**
+```bash
+cd your-project
+```
+
+3. **Start your dev server (Terminal 1):**
+```bash
+npm start
+# OR
+npm run dev
+```
+
+4. **Run DevTunnel (Terminal 2 - same directory!):**
+```bash
+cd your-project  # Same directory where you run npm start
+devtunnel        # Auto-detects project and port!
 ```
 
 **Or if downloaded from GitHub:**

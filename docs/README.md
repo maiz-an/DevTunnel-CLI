@@ -6,20 +6,38 @@ Fully automatic. Zero config. Just works.
 
 ---
 
-## ⚡ Quick Start (Just 2 Steps!)
+## ⚡ Quick Start
 
-### Step 1: Start your dev server
+### Step-by-Step Guide
+
+**1. Install DevTunnel (one-time setup):**
 ```bash
+npm install -g devtunnel-cli
+```
+
+**2. Go to your project directory:**
+```bash
+cd your-project
+```
+
+**3. Start your dev server (Terminal 1 - keep running):**
+```bash
+npm start
+# OR
 npm run dev
 ```
 
-### Step 2: Run the app
-
-**Option A: Install via npm (Recommended)**
+**4. Run DevTunnel (Terminal 2 - same directory!):**
 ```bash
-npm install -g devtunnel-cli
-devtunnel
+cd your-project  # Same directory where you run npm start
+devtunnel        # Auto-detects project and port!
 ```
+
+**Important:** Run `devtunnel` from the same directory where you run `npm start` or `npm run dev`!
+
+### Alternative Options
+
+**Option B: Download from GitHub**
 
 **Option B: Download from GitHub**
 ```

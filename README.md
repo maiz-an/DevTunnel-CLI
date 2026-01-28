@@ -13,11 +13,32 @@
 
 ## ⚡ Quick Start
 
-### Option 1: Install via npm (Recommended)
+### Step-by-Step Guide
+
+**1. Install DevTunnel (one-time setup):**
 ```bash
 npm install -g devtunnel-cli
-devtunnel
 ```
+
+**2. Navigate to your project directory:**
+```bash
+cd your-project
+```
+
+**3. Start your dev server (in one terminal):**
+```bash
+npm start
+# OR
+npm run dev
+```
+
+**4. Run DevTunnel (in another terminal, same directory):**
+```bash
+cd your-project  # Same directory where you run npm start
+devtunnel        # Auto-detects project and port!
+```
+
+**That's it!** DevTunnel will automatically detect your project and running dev server port.
 
 ### Option 2: Download from GitHub
 
@@ -54,11 +75,25 @@ npm start
 
 ## 💡 How to Use
 
-1. Start your dev server: `npm start` or `npm run dev` (whichever your project uses)
-2. Run DevTunnel (see Quick Start above)
-3. Select your project folder
-4. Enter your port (default: 5173 for Vite, 3000 for most others)
-5. Get your public URL and share it! 🌍
+**Important:** Run `devtunnel` from the same directory where you run `npm start` or `npm run dev`!
+
+1. **Install DevTunnel** (one-time): `npm install -g devtunnel-cli`
+2. **Go to your project**: `cd your-project`
+3. **Start your dev server**: `npm start` or `npm run dev` (keep this running)
+4. **Open a new terminal** in the same project directory
+5. **Run DevTunnel**: `devtunnel` (auto-detects everything!)
+6. **Get your public URL** and share it! 🌍
+
+**Example:**
+```bash
+# Terminal 1 - Your dev server
+cd my-react-app
+npm run dev
+
+# Terminal 2 - DevTunnel (same directory!)
+cd my-react-app
+devtunnel
+```
 
 **Works with any command:** Vite, Create React App, Next.js, Express, NestJS, etc.
 

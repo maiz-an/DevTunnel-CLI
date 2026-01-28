@@ -2,7 +2,17 @@
 
 ## 🚀 How to Use DevTunnel
 
-### Step 1: Start Your Dev Server
+### Step 1: Install DevTunnel (one-time)
+```bash
+npm install -g devtunnel-cli
+```
+
+### Step 2: Go to Your Project Directory
+```bash
+cd your-project
+```
+
+### Step 3: Start Your Dev Server (Terminal 1 - keep running)
 ```bash
 npm start
 # OR
@@ -10,13 +20,15 @@ npm run dev
 # OR whatever command your project uses
 ```
 
-### Step 2: Run DevTunnel
-
-**Option 1: Install via npm (Recommended)**
+### Step 4: Run DevTunnel (Terminal 2 - same directory!)
 ```bash
-npm install -g devtunnel-cli
-devtunnel
+cd your-project  # Same directory where you run npm start
+devtunnel        # Auto-detects project and port!
 ```
+
+**Important:** Run `devtunnel` from the same directory where you run `npm start` or `npm run dev`!
+
+### Alternative: Download from GitHub
 
 **Option 2: Download from GitHub**
 
@@ -41,13 +53,16 @@ chmod +x START.sh
 npm start
 ```
 
-### Step 3: Select Your Project
+### Step 5: Auto-Detection (if running from project directory)
 
-A modern folder picker will open. Navigate to and select your project folder.
+If you run `devtunnel` from your project directory, it will automatically:
+- ✅ Detect your project
+- ✅ Detect your running dev server port
+- ✅ No manual input needed!
 
-### Step 4: Enter Port Number
+### Step 6: Manual Selection (if needed)
 
-Enter the port your dev server is running on:
+If auto-detection doesn't work, a modern folder picker will open. Navigate to and select your project folder, then enter the port:
 - Vite: Usually `5173`
 - Create React App: Usually `3000`
 - Next.js: Usually `3000`

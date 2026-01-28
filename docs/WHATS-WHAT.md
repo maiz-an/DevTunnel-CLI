@@ -71,10 +71,19 @@ logs/*.log    ← Created automatically when you run the app
 ## Quick Answers
 
 ### "How do I run it?"
-- **Easiest:** `npm install -g devtunnel-cli` then `devtunnel`
+
+**Recommended (npm install):**
+1. Install: `npm install -g devtunnel-cli`
+2. Go to your project: `cd your-project`
+3. Start dev server: `npm start` (Terminal 1)
+4. Run DevTunnel: `cd your-project` then `devtunnel` (Terminal 2 - same directory!)
+
+**Alternative (download from GitHub):**
 - **Windows:** Double-click `START.bat`
 - **Mac:** Double-click `START.command`
 - **Linux:** Run `./START.sh`
+
+**Important:** Run `devtunnel` from the same directory where you run `npm start` or `npm run dev`!
 
 ### "Do I need to configure anything?"
 No! DevTunnel is zero-configuration. Just run it!
