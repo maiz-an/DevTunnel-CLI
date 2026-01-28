@@ -12,6 +12,9 @@ logs/*.log
 # Website prototype (private - for internal reference only)
 src/utils/pages/
 
+# Bundled binaries (downloaded on first run)
+bin/
+
 # Keep important JSON files
 !package.json
 !package-lock.json
