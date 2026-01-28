@@ -1,5 +1,5 @@
 {
-  "name": "@maizan/devtunnel",
+  "name": "devtunnel-cli",
   "version": "3.0.0",
   "type": "module",
   "description": "Share local dev servers worldwide - Zero config tunnel for any framework",
