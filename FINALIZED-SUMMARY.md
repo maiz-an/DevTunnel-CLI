@@ -152,12 +152,14 @@ DevTunnel/
 - ❌ Vite config editing requirement (proxy solution)
 
 ### Added
+- ✅ **npm Package** - Published as `devtunnel-cli` on npm
 - ✅ Bundled Cloudflare with auto-download
 - ✅ Enterprise error handling
 - ✅ Smart proxy server
 - ✅ Native OS folder picker
 - ✅ Professional UI boxes
 - ✅ Comprehensive documentation
+- ✅ Dynamic path detection (works with any folder name)
 
 ### Improved
 - ✅ Faster startup time
@@ -184,6 +186,13 @@ DevTunnel/
 
 ## ✨ What Users Get
 
+### Option 1: Install via npm (Recommended)
+```bash
+npm install -g devtunnel-cli
+devtunnel
+```
+
+### Option 2: Download from GitHub
 1. **Download** DevTunnel from GitHub
 2. **Run** START.bat (or .command/.sh)
 3. **Select** their project folder
