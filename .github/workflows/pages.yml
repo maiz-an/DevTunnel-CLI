@@ -34,13 +34,13 @@ jobs:
           <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta name="description" content="DevTunnel - Share local dev servers worldwide. Zero configuration tunnel for any framework. Install via npm: npm install -g devtunnel-cli">
-            <meta name="keywords" content="dev tunnel, localhost tunnel, cloudflare, ngrok, port forwarding, local development, vite, react, nextjs, npm install, devtunnel-cli">
+            <meta name="description" content="DevTunnel - Share local dev servers worldwide. Zero configuration tunnel for any framework. Install via npm: npm install -g devtunnel">
+            <meta name="keywords" content="dev tunnel, localhost tunnel, cloudflare, ngrok, port forwarding, local development, vite, react, nextjs, npm install, devtunnel">
             <meta name="author" content="maiz">
             <meta name="robots" content="index, follow">
             <link rel="canonical" href="https://maiz-an.github.io/DevTunnel/">
             <meta property="og:title" content="DevTunnel - Share Local Servers Worldwide">
-            <meta property="og:description" content="Zero configuration tunnel for any framework. Install via npm: npm install -g devtunnel-cli">
+            <meta property="og:description" content="Zero configuration tunnel for any framework. Install via npm: npm install -g devtunnel">
             <meta property="og:url" content="https://maiz-an.github.io/DevTunnel/">
             <meta property="og:type" content="website">
             <meta property="og:image" content="https://devtunnel.vercel.app/og-image.png">
@@ -64,14 +64,14 @@ jobs:
             <p><strong>Share your local dev servers worldwide - Zero config tunnel for any framework</strong></p>
             
             <div class="links">
-              <a href="https://www.npmjs.com/package/devtunnel-cli" class="badge">📦 npm Package</a>
+              <a href="https://www.npmjs.com/package/devtunnel" class="badge">📦 npm Package</a>
               <a href="https://devtunnel.vercel.app" class="badge">🌐 Website</a>
               <a href="https://github.com/maiz-an/DevTunnel" class="badge">💻 GitHub</a>
             </div>
 
             <h2>⚡ Quick Start</h2>
             <h3>Install via npm (Recommended)</h3>
-            <pre><code>npm install -g devtunnel-cli
+            <pre><code>npm install -g devtunnel
           devtunnel</code></pre>
 
             <h2>✨ Features</h2>
@@ -89,7 +89,7 @@ jobs:
 
             <h2>🔗 Links</h2>
             <ul>
-              <li><a href="https://www.npmjs.com/package/devtunnel-cli">npm Package</a></li>
+              <li><a href="https://www.npmjs.com/package/devtunnel">npm Package</a></li>
               <li><a href="https://devtunnel.vercel.app">Official Website</a></li>
               <li><a href="https://github.com/maiz-an/DevTunnel">GitHub Repository</a></li>
               <li><a href="https://github.com/maiz-an/DevTunnel/issues">Report Issues</a></li>

@@ -73,7 +73,7 @@ Your `package.json` has been enhanced with:
 - ✅ Proper repository links
 - ✅ Homepage and bugs URLs
 
-**npm Package**: https://www.npmjs.com/package/devtunnel-cli
+**npm Package**: https://www.npmjs.com/package/devtunnel
 
 ## 🔍 Google Search Optimization
 
@@ -98,7 +98,7 @@ Your `package.json` has been enhanced with:
 ### Expected Search Results:
 
 When users search **"dev tunnel"** on Google, they should see:
-1. Your npm package: `devtunnel-cli`
+1. Your npm package: `devtunnel`
 2. Your GitHub repository: `maiz-an/DevTunnel`
 3. Your website: `devtunnel.vercel.app`
 4. Your GitHub Pages: `maiz-an.github.io/DevTunnel`
@@ -109,7 +109,7 @@ When users search **"dev tunnel"** on Google, they should see:
 - [ ] Repository topics added (About → Topics)
 - [ ] First deployment completed (check Actions tab)
 - [ ] GitHub Pages site accessible: https://maiz-an.github.io/DevTunnel/
-- [ ] npm package visible: https://www.npmjs.com/package/devtunnel-cli
+- [ ] npm package visible: https://www.npmjs.com/package/devtunnel
 - [ ] All links working in README
 
 ## 🎯 Next Steps
@@ -128,7 +128,7 @@ When users search **"dev tunnel"** on Google, they should see:
 
 - **GitHub Repository**: https://github.com/maiz-an/DevTunnel
 - **GitHub Pages**: https://maiz-an.github.io/DevTunnel/ (after enabling)
-- **npm Package**: https://www.npmjs.com/package/devtunnel-cli
+- **npm Package**: https://www.npmjs.com/package/devtunnel
 - **Website**: https://devtunnel.vercel.app
 - **Repository Settings**: https://github.com/maiz-an/DevTunnel/settings
 - **Pages Settings**: https://github.com/maiz-an/DevTunnel/settings/pages

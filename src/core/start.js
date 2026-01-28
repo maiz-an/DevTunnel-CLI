@@ -188,7 +188,7 @@ async function main() {
   console.log("");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("Repository: https://github.com/maiz-an/DevTunnel");
-  console.log("npm Package: https://www.npmjs.com/package/devtunnel-cli");
+  console.log("npm Package: https://www.npmjs.com/package/devtunnel");
   console.log("Website: https://devtunnel.vercel.app");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("");

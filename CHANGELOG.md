@@ -38,7 +38,7 @@ All notable changes to DevTunnel will be documented in this file.
 - **Cleaner Output** - No more deprecation warnings cluttering the console
 
 ### Changed
-- **Installation Method** - DevTunnel now exclusively uses npm for installation (`npm install -g devtunnel-cli`)
+- **Installation Method** - DevTunnel now exclusively uses npm for installation (`npm install -g devtunnel`)
 - **Documentation** - Updated all docs to reflect npm-only installation
 - **Documentation** - Added comprehensive list of supported frameworks and backends
 - **Clarified Support** - Explicitly states DevTunnel works with ALL APIs and backends
@@ -140,7 +140,7 @@ All notable changes to DevTunnel will be documented in this file.
 ### 🎉 Major Release
 
 #### Added
-- **npm Package** - Published as `devtunnel-cli` on npm for easy global installation
+- **npm Package** - Published as `devtunnel` on npm for easy global installation
 - **Bundled Cloudflare** - Automatically downloads on first run, no installation needed
 - **Enterprise Error Handling** - Retry logic, multiple sources, comprehensive error messages
 - **Smart Proxy Server** - Bypasses Vite/React host restrictions without config changes

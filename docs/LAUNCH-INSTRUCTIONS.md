@@ -6,7 +6,7 @@
 
 1. **Install DevTunnel (one-time):**
 ```bash
-npm install -g devtunnel-cli
+npm install -g devtunnel
 ```
 
 2. **Go to your project directory:**
@@ -47,7 +47,7 @@ devtunnel        # Auto-detects project and port!
 
 When sharing with friends, tell them:
 
-**"Install: `npm install -g devtunnel-cli`, then run `devtunnel` from your project directory"**
+**"Install: `npm install -g devtunnel`, then run `devtunnel` from your project directory"**
 
 Simple and works for everyone!
 

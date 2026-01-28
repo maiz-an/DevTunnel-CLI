@@ -33,7 +33,7 @@ npm install
 
 # Run the app
 npm start
-# Or install globally: npm install -g devtunnel-cli
+# Or install globally: npm install -g devtunnel
 ```
 
 #### Making Changes

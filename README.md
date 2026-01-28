@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](https://github.com/maiz-an/DevTunnel)
-[![npm version](https://img.shields.io/npm/v/devtunnel-cli)](https://www.npmjs.com/package/devtunnel-cli)
+[![npm version](https://img.shields.io/npm/v/devtunnel)](https://www.npmjs.com/package/devtunnel)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://maiz-an.github.io/DevTunnel/)
 
 🌐 **Website:** [devtunnel.vercel.app](https://devtunnel.vercel.app) | 📦 **npm:** [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli) | 💻 **GitHub Pages:** [maiz-an.github.io/DevTunnel](https://maiz-an.github.io/DevTunnel/)
@@ -17,7 +17,7 @@
 
 **1. Install DevTunnel (one-time setup):**
 ```bash
-npm install -g devtunnel-cli
+npm install -g devtunnel
 ```
 
 **2. Navigate to your project directory:**
@@ -58,7 +58,7 @@ devtunnel        # Auto-detects project and port!
 
 **Important:** Run `devtunnel` from the same directory where you run `npm start` or `npm run dev`!
 
-1. **Install DevTunnel** (one-time): `npm install -g devtunnel-cli`
+1. **Install DevTunnel** (one-time): `npm install -g devtunnel`
 2. **Go to your project**: `cd your-project`
 3. **Start your dev server**: `npm start` or `npm run dev` (keep this running)
 4. **Open a new terminal** in the same project directory
@@ -118,7 +118,7 @@ MIT License - see [LICENSE](docs/LICENSE)
 
 ## 📦 Installation & Links
 
-- **npm Package**: [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli)
+- **npm Package**: [devtunnel](https://www.npmjs.com/package/devtunnel)
 - **GitHub Repository**: [maiz-an/DevTunnel](https://github.com/maiz-an/DevTunnel)
 - **GitHub Pages**: [maiz-an.github.io/DevTunnel](https://maiz-an.github.io/DevTunnel/)
 - **Official Website**: [devtunnel.vercel.app](https://devtunnel.vercel.app)

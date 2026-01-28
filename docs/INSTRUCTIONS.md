@@ -4,7 +4,7 @@
 
 ### Step 1: Install DevTunnel (one-time)
 ```bash
-npm install -g devtunnel-cli
+npm install -g devtunnel
 ```
 
 ### Step 2: Go to Your Project Directory
@@ -93,7 +93,7 @@ DevTunnel will display:
 
 ## 🔄 Sharing with Friends
 
-1. Tell them to install: `npm install -g devtunnel-cli`
+1. Tell them to install: `npm install -g devtunnel`
 2. They run `devtunnel` from their project directory
 3. Auto-detection selects their project
 4. They get instant public URL
