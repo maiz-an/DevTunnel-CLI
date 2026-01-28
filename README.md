@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](https://github.com/maiz-an/DevTunnel)
-[![npm version](https://img.shields.io/npm/v/devtunnel)](https://www.npmjs.com/package/devtunnel)
+[![npm version](https://img.shields.io/npm/v/devtunnel-cli)](https://www.npmjs.com/package/devtunnel-cli)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://maiz-an.github.io/DevTunnel/)
 
 🌐 **Website:** [devtunnel.vercel.app](https://devtunnel.vercel.app) | 📦 **npm:** [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli) → Requesting `devtunnel` name | 💻 **GitHub Pages:** [maiz-an.github.io/DevTunnel](https://maiz-an.github.io/DevTunnel/)
