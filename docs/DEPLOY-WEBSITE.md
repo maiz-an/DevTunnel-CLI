@@ -1,164 +1,138 @@
-# 🌐 Deploy DevTunnel Website to GitHub Pages
+# 🌐 DevTunnel Website Hosting Guide
 
-## 🚀 Automatic Deployment (Recommended)
+## 📍 Website Location
 
-### Enable GitHub Pages
-
-1. **Go to Repository Settings:**
-   - Visit: https://github.com/maiz-an/DevTunnel/settings/pages
-
-2. **Configure Source:**
-   - Source: `GitHub Actions`
-
-3. **Create Workflow File:**
-   ```bash
-   # Create .github/workflows directory in website branch
-   git checkout website
-   mkdir -p .github/workflows
-   ```
-
-4. **Add Workflow File:**
-   Create `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [website]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          
-      - name: Install dependencies
-        run: |
-          cd website
-          npm ci
-          
-      - name: Build
-        run: |
-          cd website
-          npm run build
-          
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./website/out
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+The standalone website is located at:
+```
+src/utils/pages/
 ```
 
-5. **Commit and Push:**
-   ```bash
-   git add .github/workflows/deploy.yml
-   git commit -m "Add GitHub Pages deployment workflow"
-   git push
-   ```
+## 🚀 Quick Preview
 
-6. **Your Website Will Be Live At:**
-   ```
-   https://maiz-an.github.io/DevTunnel
-   ```
+**Windows:**
+```
+Double-click: src/utils/pages/PREVIEW.bat
+```
 
----
-
-## 🔧 Manual Build (Testing)
-
+**Mac/Linux:**
 ```bash
-# Switch to website branch
-git checkout website
-
-# Navigate to website folder
-cd website
-
-# Install dependencies
-npm install
-
-# Build
-npm run build
-
-# Output will be in 'out' folder
+cd src/utils/pages
+open index.html
 ```
 
 ---
 
-## 💻 Local Development
+## 🌐 Hosting Options
 
-```bash
-git checkout website
-cd website
-npm install
-npm run dev
-```
+### Option 1: GitHub Pages (Simplest)
 
-Open: http://localhost:3000
+1. **Create new repository** `devtunnel-website`
 
----
-
-## 🌐 Your Live Website
-
-After deployment, your website will be available at:
-
-**https://maiz-an.github.io/DevTunnel**
-
----
-
-## 📝 Updating the Website
-
-1. Switch to website branch:
+2. **Copy files:**
    ```bash
-   git checkout website
+   cp -r src/utils/pages/* /path/to/devtunnel-website/
+   cd /path/to/devtunnel-website
    ```
 
-2. Edit `website/app/page.tsx`
-
-3. Commit and push:
+3. **Push to GitHub:**
    ```bash
+   git init
    git add .
-   git commit -m "Update website"
-   git push
+   git commit -m "Initial website"
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/devtunnel-website.git
+   git push -u origin main
    ```
 
-4. GitHub Actions will automatically rebuild and deploy! ✨
+4. **Enable GitHub Pages:**
+   - Settings → Pages
+   - Source: `main` branch
+   - Folder: `/ (root)`
+
+5. **Live at:**
+   ```
+   https://YOUR_USERNAME.github.io/devtunnel-website
+   ```
 
 ---
 
-## ✅ Deployment Checklist
+### Option 2: Netlify Drop (Easiest)
 
-- [ ] GitHub Pages enabled in repository settings
-- [ ] Source set to "GitHub Actions"
-- [ ] Workflow file created in `.github/workflows/deploy.yml`
-- [ ] Website branch exists and is pushed
-- [ ] First deployment triggered (automatic on push)
-- [ ] Website live at: https://maiz-an.github.io/DevTunnel
+1. Go to [app.netlify.com/drop](https://app.netlify.com/drop)
+2. Drag `src/utils/pages` folder
+3. Get instant live URL!
 
 ---
 
-**Your DevTunnel website will be live in 2-3 minutes after setup!** 🎉
+### Option 3: Vercel
+
+1. Go to [vercel.com](https://vercel.com)
+2. Import `src/utils/pages` folder
+3. Deploy!
+
+---
+
+### Option 4: Cloudflare Pages
+
+1. Go to [pages.cloudflare.com](https://pages.cloudflare.com)
+2. Upload `src/utils/pages` folder
+3. Done!
+
+---
+
+## 📁 Website Files
+
+- `index.html` - Main landing page
+- `styles.css` - Modern dark theme styling
+- `script.js` - Interactive features
+- `README.md` - Hosting instructions
+- `PREVIEW.bat` - Windows preview launcher
+
+---
+
+## ✨ Features
+
+- ✅ Pure HTML/CSS/JS (no build step)
+- ✅ Fully responsive
+- ✅ Modern dark theme
+- ✅ Interactive terminal demo
+- ✅ Smooth animations
+- ✅ Fast loading
+- ✅ SEO-friendly
+
+---
+
+## 🎨 Customization
+
+**Colors:** Edit `styles.css`
+```css
+:root {
+    --primary: #3b82f6;
+    --secondary: #8b5cf6;
+}
+```
+
+**Content:** Edit `index.html` directly
+
+---
+
+## 🔧 Local Testing
+
+```bash
+cd src/utils/pages
+
+# Python
+python -m http.server 8000
+
+# Node.js
+npx serve
+
+# PHP
+php -S localhost:8000
+```
+
+Then visit: http://localhost:8000
+
+---
+
+**See `src/utils/pages/README.md` for full details!** 🚀
