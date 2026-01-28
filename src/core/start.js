@@ -38,15 +38,16 @@ async function commandExists(command) {
 // ASCII Logo - Compatible with all OS and terminals
 function showLogo() {
   console.log("");
-  console.log("  _____            _____                    _ _ ");
-  console.log(" |  __ \\          |_   _|                  | | |");
-  console.log(" | |  | |_   _  ___ | |_   _ _ __   ___  ___| | |");
-  console.log(" | |  | | | | |/ _ \\| | | | | '_ \\ / _ \\/ _ \\ | |");
-  console.log(" | |__| | |_| |  __/| | |_| | | | |  __/  __/ | |");
-  console.log(" |_____/ \\__, |\\___|\\_/\\__,_|_| |_|\\___|\\___|_|_|");
-  console.log("          __/ |                                   ");
-  console.log("         |___/                                    ");
-  console.log("");
+  console.log("                                                                                          ");
+  console.log(" ▄▄▄▄▄                         ▄▄▄▄▄▄▄▄                                          ▄▄▄▄     ");
+  console.log(" ██▀▀▀██                       ▀▀▀██▀▀▀                                          ▀▀██     ");
+  console.log(" ██    ██   ▄████▄   ██▄  ▄██     ██     ██    ██  ██▄████▄  ██▄████▄   ▄████▄     ██     ");
+  console.log(" ██    ██  ██▄▄▄▄██   ██  ██      ██     ██    ██  ██▀   ██  ██▀   ██  ██▄▄▄▄██    ██     ");
+  console.log(" ██    ██  ██▀▀▀▀▀▀   ▀█▄▄█▀      ██     ██    ██  ██    ██  ██    ██  ██▀▀▀▀▀▀    ██     ");
+  console.log(" ██▄▄▄██   ▀██▄▄▄▄█    ████       ██     ██▄▄▄███  ██    ██  ██    ██  ▀██▄▄▄▄█    ██▄▄▄  ");
+  console.log(" ▀▀▀▀▀       ▀▀▀▀▀      ▀▀        ▀▀      ▀▀▀▀ ▀▀  ▀▀    ▀▀  ▀▀    ▀▀    ▀▀▀▀▀      ▀▀▀▀  ");
+  console.log("                                                                                          ");
+  console.log("                                                                                          ");
 }
 
 // Main function
