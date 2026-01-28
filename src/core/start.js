@@ -122,7 +122,8 @@ async function main() {
 
   // Start proxy server
   console.log("⚡ Starting services...\n");
-  const proxyProcess = spawn("node", ["proxy-server.js", devPort.toString(), proxyPort.toString(), projectName], {
+  const proxyPath = join(__dirname, "proxy-server.js");
+  const proxyProcess = spawn("node", [proxyPath, devPort.toString(), proxyPort.toString(), projectName], {
     stdio: "inherit",
     shell: true
   });
@@ -131,7 +132,8 @@ async function main() {
   await new Promise(resolve => setTimeout(resolve, 2000));
 
   // Run main tunnel app (connects to proxy port)
-  const tunnelProcess = spawn("node", ["index.js", proxyPort.toString(), projectName, projectPath], {
+  const indexPath = join(__dirname, "index.js");
+  const tunnelProcess = spawn("node", [indexPath, proxyPort.toString(), projectName, projectPath], {
     stdio: "inherit",
     shell: true
   });
