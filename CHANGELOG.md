@@ -38,7 +38,7 @@ All notable changes to DevTunnel will be documented in this file.
 - **Cleaner Output** - No more deprecation warnings cluttering the console
 
 ### Changed
-- **Installation Method** - DevTunnel now exclusively uses npm for installation (`npm install -g devtunnel`)
+- **Installation Method** - DevTunnel now exclusively uses npm for installation (`npm install -g devtunnel-cli`)
 - **Documentation** - Updated all docs to reflect npm-only installation
 - **Documentation** - Added comprehensive list of supported frameworks and backends
 - **Clarified Support** - Explicitly states DevTunnel works with ALL APIs and backends
@@ -132,7 +132,7 @@ All notable changes to DevTunnel will be documented in this file.
 ## [3.0.1] - 2026-01-28
 
 ### Fixed
-- **npm Install Path Issue** - Fixed module resolution error when installed via `npm install -g devtunnel`
+- **npm Install Path Issue** - Fixed module resolution error when installed via `npm install -g devtunnel-cli`
 - Path resolution now works correctly for both npm install and repo run methods
 
 ## [3.0.0] - 2026-01-28

@@ -38,7 +38,7 @@ DevTunnel/
 
 ### Installation
 
-Install via npm: `npm install -g devtunnel`
+Install via npm: `npm install -g devtunnel-cli`
 
 ### Core (`src/core/`)
 

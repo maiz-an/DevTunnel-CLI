@@ -84,7 +84,7 @@ function showPermissionSolutions(dirPath) {
     console.log('   1. Run terminal as Administrator (Right-click → Run as administrator)');
     console.log('   2. DevTunnel will automatically request admin privileges if needed');
   } else {
-        console.log('   1. Run with sudo: sudo npm install -g devtunnel');
+        console.log('   1. Run with sudo: sudo npm install -g devtunnel-cli');
   }
   console.log('   2. Check if antivirus is blocking file writes');
   console.log('   3. Check folder permissions for:', dirPath);

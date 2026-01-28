@@ -4,7 +4,7 @@
 
 ### 🚀 To RUN the app:
 ```bash
-npm install -g devtunnel  # One-time install
+npm install -g devtunnel-cli  # One-time install
 devtunnel                      # Run from your project directory
 ```
 
@@ -72,7 +72,7 @@ logs/*.log    ← Created automatically when you run the app
 ### "How do I run it?"
 
 **Install and run:**
-1. Install: `npm install -g devtunnel` (one-time)
+1. Install: `npm install -g devtunnel-cli` (one-time)
 2. Go to your project: `cd your-project`
 3. Start dev server: `npm start` (Terminal 1)
 4. Run DevTunnel: `cd your-project` then `devtunnel` (Terminal 2 - same directory!)

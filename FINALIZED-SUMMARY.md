@@ -11,7 +11,7 @@
 **Share your local dev servers worldwide with zero configuration**
 
 - Run your dev server: `npm start` or `npm run dev`
-- Run DevTunnel: `npm install -g devtunnel` then `cd your-project && devtunnel` (auto-detects everything!)
+- Run DevTunnel: `npm install -g devtunnel-cli` then `cd your-project && devtunnel` (auto-detects everything!)
 - Get instant public URL
 - Share with anyone!
 

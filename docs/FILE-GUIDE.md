@@ -3,7 +3,7 @@
 ## Root Files (What You See First)
 
 ### 🚀 Installation
-Install via npm: `npm install -g devtunnel`
+Install via npm: `npm install -g devtunnel-cli`
 
 ### 📖 Documentation
 | File | Purpose |
@@ -75,7 +75,7 @@ logs/
 
 ### Installation
 
-Install via npm: `npm install -g devtunnel`
+Install via npm: `npm install -g devtunnel-cli`
 
 Then run: `devtunnel` from your project directory
 

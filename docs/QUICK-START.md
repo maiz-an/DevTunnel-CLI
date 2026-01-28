@@ -6,7 +6,7 @@
 
 1. **Install DevTunnel (one-time):**
 ```bash
-npm install -g devtunnel
+npm install -g devtunnel-cli
 ```
 
 2. **Go to your project directory:**

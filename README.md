@@ -7,7 +7,7 @@
 [![npm version](https://img.shields.io/npm/v/devtunnel-cli)](https://www.npmjs.com/package/devtunnel-cli)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://maiz-an.github.io/DevTunnel/)
 
-🌐 **Website:** [devtunnel.vercel.app](https://devtunnel.vercel.app) | 📦 **npm:** [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli) → Requesting `devtunnel` name | 💻 **GitHub Pages:** [maiz-an.github.io/DevTunnel](https://maiz-an.github.io/DevTunnel/)
+🌐 **Website:** [devtunnel.vercel.app](https://devtunnel.vercel.app) | 📦 **npm:** [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli) | 💻 **GitHub Pages:** [maiz-an.github.io/DevTunnel](https://maiz-an.github.io/DevTunnel/)
 
 ---
 
@@ -58,7 +58,7 @@ devtunnel        # Auto-detects project and port!
 
 **Important:** Run `devtunnel` from the same directory where you run `npm start` or `npm run dev`!
 
-1. **Install DevTunnel** (one-time): `npm install -g devtunnel`
+1. **Install DevTunnel** (one-time): `npm install -g devtunnel-cli`
 2. **Go to your project**: `cd your-project`
 3. **Start your dev server**: `npm start` or `npm run dev` (keep this running)
 4. **Open a new terminal** in the same project directory

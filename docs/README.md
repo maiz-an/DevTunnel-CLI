@@ -12,7 +12,7 @@ Fully automatic. Zero config. Just works.
 
 **1. Install DevTunnel (one-time setup):**
 ```bash
-npm install -g devtunnel
+npm install -g devtunnel-cli
 ```
 
 **2. Go to your project directory:**
@@ -64,7 +64,7 @@ devtunnel        # Auto-detects project and port!
 
 ## 📤 Share with Friends
 
-1. Tell them to install: `npm install -g devtunnel`
+1. Tell them to install: `npm install -g devtunnel-cli`
 2. They run: `devtunnel` from their project directory
 3. **Done!** Everything works automatically
 

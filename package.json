@@ -2,7 +2,7 @@
   "name": "devtunnel-cli",
   "version": "3.0.14",
   "type": "module",
-  "description": "DevTunnel - Share local dev servers worldwide. Zero configuration tunnel for any framework. Install via npm: npm install -g devtunnel. Works with Vite, React, Next.js, Express, NestJS and more.",
+  "description": "DevTunnel - Share local dev servers worldwide. Zero configuration tunnel for any framework. Install via npm: npm install -g devtunnel-cli. Works with Vite, React, Next.js, Express, NestJS and more.",
   "main": "src/core/start.js",
   "bin": {
     "devtunnel": "src/core/RUN.js"
