@@ -9,7 +9,7 @@ import { dirname, join } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-console.log("\n🚀 Forward Development - Universal Launcher\n");
+console.log("\n🚀 DevTunnel - Universal Launcher\n");
 console.log(`📍 Platform detected: ${platform()}\n`);
 
 // Start the main app

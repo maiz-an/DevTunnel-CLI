@@ -41,7 +41,7 @@ jobs:
             - 🎯 Zero config required
             - 🔗 Smart proxy for Vite/React/Next.js
             - 🌍 Cross-platform (Windows, macOS, Linux)
-            - 📝 Custom branding support
+            - 🔄 Multi-service fallback (Cloudflare, Ngrok, LocalTunnel)
             
             ## 📖 Documentation
             
