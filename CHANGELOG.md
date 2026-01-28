@@ -2,6 +2,11 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.5] - 2026-01-28
+
+### Changed
+- **Updated ASCII Logo** - Replaced with exact stylized "DevTunnel" logo design (box-drawing characters)
+
 ## [3.0.4] - 2026-01-28
 
 ### Changed
