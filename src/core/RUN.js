@@ -9,7 +9,9 @@ import { dirname, join } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Silent launcher - no output needed
+// Clear screen before starting
+process.stdout.write('\x1B[2J\x1B[0f');
+console.clear();
 
 // Start the main app
 // start.js is in the same directory as RUN.js (src/core/)

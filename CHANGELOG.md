@@ -2,6 +2,15 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.2] - 2026-01-28
+
+### Changed
+- **Clean UI Design** - Removed box UI, replaced with simple lines for professional look
+- **Reduced Font Size** - Standard font size throughout (no oversized text)
+- **App & Developer Info** - Added header with app details and developer information at startup
+- **Simplified Output** - Clean, minimal output like real-world CLI tools
+- **Removed Emojis** - Professional text-only output
+
 ## [3.0.1] - 2026-01-28
 
 ### Fixed
