@@ -139,6 +139,16 @@ Full WebSocket proxying for:
 - Real-time features
 - Live updates
 
+### File Streaming Support
+
+DevTunnel supports streaming large files:
+- ✅ Video files (MP4, WebM, etc.)
+- ✅ Audio files
+- ✅ Large downloads
+- ✅ Progressive loading
+- ⚠️ **Note**: Cloudflare free tier has limitations for very large files (>100MB)
+- ⚠️ **Note**: Streaming may timeout for files >50MB depending on connection speed
+
 ### CORS Handling
 
 Automatic CORS headers:
@@ -187,6 +197,36 @@ Works with any frontend!
 2. Keep dev server and tunnel on same machine
 3. Use wired connection over WiFi
 4. Close unnecessary apps
+
+---
+
+## Limitations & Notes
+
+### File Size & Streaming
+
+- ✅ **Small files (<10MB)**: Works perfectly
+- ✅ **Medium files (10-50MB)**: Works well, may have slight delays
+- ⚠️ **Large files (>50MB)**: May timeout depending on connection speed
+- ⚠️ **Very large files (>100MB)**: Not recommended for Cloudflare free tier
+
+### Streaming Video/Audio
+
+- ✅ **Short videos (<5 minutes)**: Works great
+- ⚠️ **Long videos (>10 minutes)**: May experience interruptions
+- 💡 **Tip**: For large media files, consider using a CDN or cloud storage instead
+
+### Cloudflare Free Tier Limits
+
+- Request timeout: ~100 seconds
+- Connection limits apply
+- Best for development/testing, not production
+
+### Best Practices
+
+1. **For development**: DevTunnel is perfect! ✅
+2. **For production**: Use proper hosting/CDN
+3. **For large files**: Use cloud storage (S3, Cloudflare R2, etc.)
+4. **For video streaming**: Use dedicated video hosting (Vimeo, YouTube, etc.)
 
 ---
 

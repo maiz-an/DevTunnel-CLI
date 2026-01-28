@@ -48,6 +48,7 @@ npm start
 - 🌍 **Cross-Platform** - Windows, macOS, Linux
 - 🚀 **Any Framework** - Works with all
 - 🔄 **Multi-Service** - Cloudflare, Ngrok, LocalTunnel fallback
+- 📹 **Streaming Support** - Handles video/audio files (with limitations for large files)
 
 ---
 
