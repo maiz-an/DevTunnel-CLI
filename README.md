@@ -32,7 +32,7 @@ npm start
 
 ## ✨ Features
 
-- 🤖 **Fully Automatic** - Installs everything automatically
+- 🤖 **Fully Automatic** - Cloudflare bundled, no installation needed
 - 🎯 **Zero Config** - No project changes needed
 - 🔗 **Smart Proxy** - Bypasses Vite/React restrictions
 - 🌍 **Cross-Platform** - Windows, macOS, Linux
@@ -72,9 +72,11 @@ Complete docs in `/docs` folder:
 
 ## 🛠️ Requirements
 
-- Node.js 16+
+- Node.js 16+ (download from [nodejs.org](https://nodejs.org))
 - Internet connection
 - Your dev server running
+
+**No other installations needed!** Cloudflare is automatically bundled on first run.
 
 ---
 
