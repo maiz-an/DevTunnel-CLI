@@ -2,6 +2,11 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.29] - 2026-01-30
+
+### Changed
+- **Repo & website rename** - GitHub: maiz-an/DevTunnel-CLI, website: devtunnel-cli.vercel.app (npm package page updated)
+
 ## [3.0.28] - 2026-01-30
 
 ### Changed
