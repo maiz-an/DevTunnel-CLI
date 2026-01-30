@@ -1,8 +1,10 @@
 # 🌐 DevTunnel Website Hosting Guide
 
-## 📍 Website Location
+## 📍 Official Website
 
-The standalone website is located at:
+**Live site:** [https://devtunnel.vercel.app](https://devtunnel.vercel.app) (hosted on Vercel)
+
+The standalone website source is in:
 ```
 src/utils/pages/
 ```
@@ -24,39 +26,15 @@ open index.html
 
 ## 🌐 Hosting Options
 
-### Option 1: GitHub Pages (Simplest)
+### Option 1: Vercel (Recommended – official site)
 
-1. **Create new repository** `devtunnel-website`
-
-2. **Copy files:**
-   ```bash
-   cp -r src/utils/pages/* /path/to/devtunnel-website/
-   cd /path/to/devtunnel-website
-   ```
-
-3. **Push to GitHub:**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial website"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/devtunnel-website.git
-   git push -u origin main
-   ```
-
-4. **Enable GitHub Pages:**
-   - Settings → Pages
-   - Source: `main` branch
-   - Folder: `/ (root)`
-
-5. **Live at:**
-   ```
-   https://YOUR_USERNAME.github.io/devtunnel-website
-   ```
+1. Go to [vercel.com](https://vercel.com)
+2. Import the project or `src/utils/pages` folder
+3. Deploy — official site: [devtunnel.vercel.app](https://devtunnel.vercel.app)
 
 ---
 
-### Option 2: Netlify Drop (Easiest)
+### Option 2: Netlify Drop
 
 1. Go to [app.netlify.com/drop](https://app.netlify.com/drop)
 2. Drag `src/utils/pages` folder
@@ -64,15 +42,7 @@ open index.html
 
 ---
 
-### Option 3: Vercel
-
-1. Go to [vercel.com](https://vercel.com)
-2. Import `src/utils/pages` folder
-3. Deploy!
-
----
-
-### Option 4: Cloudflare Pages
+### Option 3: Cloudflare Pages
 
 1. Go to [pages.cloudflare.com](https://pages.cloudflare.com)
 2. Upload `src/utils/pages` folder
