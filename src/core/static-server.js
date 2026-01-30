@@ -7,7 +7,7 @@ import http from "http";
 import fs from "fs";
 import path from "path";
 const ROOT = path.resolve(process.argv[2] || ".");
-const PORT = parseInt(process.argv[3] || "8080", 10);
+const PORT = parseInt(process.argv[3] || "5500", 10);
 
 const MIME = {
   ".html": "text/html",
@@ -36,7 +36,8 @@ const server = http.createServer((req, res) => {
   }
   // Use only pathname (strip query string and hash) so /style.css?v=1 resolves to style.css
   const pathname = (req.url || "/").split("?")[0].split("#")[0];
-  const relative = path.normalize(pathname).replace(/^\//, "") || ".";
+  // Forward slashes only so /css/style.css works on Windows (path.normalize can break with \)
+  const relative = (pathname || "/").replace(/^\/+/, "").replace(/\\/g, "/") || ".";
   let p = path.join(ROOT, relative);
   if (!path.isAbsolute(p)) p = path.join(ROOT, p);
   if (!p.startsWith(ROOT)) {

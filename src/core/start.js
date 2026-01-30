@@ -17,10 +17,10 @@ function getPackageVersion() {
     const pkgPath = join(PROJECT_ROOT, "package.json");
     if (existsSync(pkgPath)) {
       const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
-      return pkg.version || "3.0.23";
+      return pkg.version || "3.0.24";
     }
   } catch (err) {}
-  return "3.0.23";
+  return "3.0.24";
 }
 
 // Helper to run command
@@ -133,12 +133,12 @@ function detectLaravelProject(currentDir) {
 function detectHtmlProject(currentDir) {
   const indexPath = join(currentDir, "index.html");
   if (!existsSync(indexPath)) return null;
-  return { name: basename(currentDir), defaultPort: 8080 }; // common for HTML/Live Server/XAMPP
+  return { name: basename(currentDir), defaultPort: 5500 }; // Live Server default; matches VS Code
 }
 
 // Check common ports for running dev servers (includes Laravel 8000, XAMPP/Live Server 8080/5500)
 async function detectRunningDevServer() {
-  const commonPorts = [3000, 5173, 8080, 8000, 5000, 4000, 5500, 3001, 5174];
+  const commonPorts = [3000, 5173, 5500, 8080, 8000, 5000, 4000, 3001, 5174]; // 5500 before 8080 for Live Server
   const detected = [];
   
   for (const port of commonPorts) {
@@ -206,7 +206,7 @@ async function autoDetectProject() {
     }
   }
 
-  // 3) Plain HTML (index.html) — default port 8080 (Live Server, XAMPP, etc.)
+  // 3) Plain HTML (index.html) — default port 5500 (Live Server), else built-in static server
   const html = detectHtmlProject(currentDir);
   if (html) {
     const detectedPort = runningPorts.length > 0 ? runningPorts[0] : html.defaultPort;
@@ -514,7 +514,7 @@ async function main() {
     let detectedPort = laravelSelected
       ? laravelSelected.defaultPort
       : htmlSelected
-        ? htmlSelected.defaultPort
+        ? htmlSelected.defaultPort  // 5500
         : detectPortFromPackage(selectedPackagePath);
     
     // Check for running servers
