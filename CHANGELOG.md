@@ -2,6 +2,82 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.26] - 2026-01-30
+
+### Added
+- **PHP/XAMPP detection** - Auto-detect projects with `index.php` (port 80)
+- **XAMPP subfolder support** - Base path for `htdocs/ProjectName` so `http://localhost/PeopleQ/` works via tunnel
+- **Port 80 in common ports** - Detects running Apache/XAMPP
+
+### Changed
+- Proxy accepts optional base path for path rewriting (XAMPP subfolders)
+
+## [3.0.25] - 2026-01-30
+
+### Added
+- **Port override prompt** - When using detected project, can keep default port or type another (e.g. HTML default 5500)
+
+### Changed
+- Manual folder pick suggests 5500 for HTML, 80 for PHP
+
+## [3.0.24] - 2026-01-30
+
+### Changed
+- **HTML default port 5500** - Matches VS Code Live Server; built-in static server uses 5500
+- **Port scan order** - 5500 before 8080 so Live Server is preferred
+- **Static server path fix** - Forward-slash paths on Windows so CSS/JS in subfolders load correctly
+
+## [3.0.23] - 2026-01-30
+
+### Fixed
+- **HTML tunnel CSS/JS** - Strip query string from asset paths; rewrite absolute localhost URLs in HTML so styles/scripts work through tunnel
+
+## [3.0.22] - 2026-01-30
+
+### Added
+- **Version command** - `devtunnel-cli --version`, `-v`, or `--v` prints version and exits
+
+## [3.0.21] - 2026-01-30
+
+### Fixed
+- **npm page** - Explicit `files` in package.json; version from package.json in CLI; README install command and links use devtunnel-cli
+
+## [3.0.20] - 2026-01-30
+
+### Changed
+- README: install command `devtunnel-cli`, remove hardcoded version, fix npm package links
+
+## [3.0.19] - 2026-01-30
+
+### Added
+- **HTML built-in static server** - When HTML project and no server running, start static server and wait until ready before tunnel
+- **waitForServerReady()** - Poll port until server responds (HTML flow)
+
+### Fixed
+- Suppress `util._extend` deprecation in proxy (dynamic import of http-proxy)
+
+## [3.0.18] - 2026-01-30
+
+### Fixed
+- **Version display** - Read version from package.json so CLI banner shows correct version
+
+## [3.0.17] - 2026-01-30
+
+### Added
+- **HTML project detection** - `index.html` in root → default port 8080 (then 5500)
+- **Laravel/PHP detection** - `composer.json` + `artisan` → default port 8000 (`php artisan serve`)
+- **detectLaravelProject(), detectHtmlProject()** - Project-type helpers
+- **Common ports** - 5500 (Live Server), 8000 (Laravel) in port scan
+
+### Changed
+- **Auto-detect order** - Laravel first, then Node (package.json), then HTML
+- Manual folder pick suggests 8000 for Laravel, 8080 for HTML
+
+## [3.0.16] - 2026-01-30
+
+### Changed
+- (Version bump; features in 3.0.17)
+
 ## [3.0.15] - 2026-01-28
 
 ### Changed

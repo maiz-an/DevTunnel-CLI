@@ -64,7 +64,7 @@ jobs:
             <p><strong>Share your local dev servers worldwide - Zero config tunnel for any framework</strong></p>
             
             <div class="links">
-              <a href="https://www.npmjs.com/package/devtunnel" class="badge">📦 npm Package</a>
+              <a href="https://www.npmjs.com/package/devtunnel-cli" class="badge">📦 npm Package</a>
               <a href="https://devtunnel.vercel.app" class="badge">🌐 Website</a>
               <a href="https://github.com/maiz-an/DevTunnel" class="badge">💻 GitHub</a>
             </div>
@@ -82,6 +82,9 @@ jobs:
               <li>🌍 Cross-Platform - Windows, macOS, Linux</li>
               <li>🚀 Any Framework - Works with all</li>
               <li>🔄 Multi-Service - Cloudflare, Ngrok, LocalTunnel fallback</li>
+              <li>🍃 Laravel (PHP) - Auto port 8000, XAMPP/htdocs base path</li>
+              <li>📄 HTML - Default port 5500 (Live Server), built-in static server</li>
+              <li>🐘 PHP/XAMPP - Port 80, http://localhost/ProjectName/</li>
             </ul>
 
             <h2>📖 Documentation</h2>
@@ -89,14 +92,14 @@ jobs:
 
             <h2>🔗 Links</h2>
             <ul>
-              <li><a href="https://www.npmjs.com/package/devtunnel">npm Package</a></li>
+              <li><a href="https://www.npmjs.com/package/devtunnel-cli">npm Package (devtunnel-cli)</a></li>
               <li><a href="https://devtunnel.vercel.app">Official Website</a></li>
               <li><a href="https://github.com/maiz-an/DevTunnel">GitHub Repository</a></li>
               <li><a href="https://github.com/maiz-an/DevTunnel/issues">Report Issues</a></li>
             </ul>
 
             <hr>
-            <p><small>Version 3.0.15 | Made with ❤️ for developers worldwide</small></p>
+            <p><small>Version 3.0.26 | Made with ❤️ for developers worldwide</small></p>
           </body>
           </html>
           EOHTML
