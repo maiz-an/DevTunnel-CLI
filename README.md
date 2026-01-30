@@ -111,6 +111,12 @@ MIT License - see [LICENSE](docs/LICENSE)
 
 ---
 
+## 🔍 Search keywords
+
+Find this project as: **DevTunnel**, **devtunnel**, **dev-tunnel**, **Dev-Tunnel**, **DevTunnel-CLI**, **devtunnel-cli**, **dev-tunnel-cli**, **Dev-Tunnel-CLI**. Official site: [devtunnel-cli.vercel.app](https://devtunnel-cli.vercel.app) · GitHub: [maiz-an/DevTunnel-CLI](https://github.com/maiz-an/DevTunnel-CLI) · npm: [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli).
+
+---
+
 ## 📦 Links
 
 - **Website**: [devtunnel-cli.vercel.app](https://devtunnel-cli.vercel.app)

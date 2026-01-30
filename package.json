@@ -2,7 +2,7 @@
   "name": "devtunnel-cli",
   "version": "3.0.31",
   "type": "module",
-  "description": "DevTunnel - Share local dev servers worldwide. Zero configuration tunnel for any framework. Install via npm: npm install -g devtunnel-cli. Works with Vite, React, Next.js, Express, NestJS, Laravel (PHP), HTML, and more.",
+  "description": "DevTunnel-CLI (DevTunnel, devtunnel, dev-tunnel) - Share local dev servers worldwide. Zero config tunnel. npm install -g devtunnel-cli. Works with Vite, React, Laravel, HTML, PHP/XAMPP.",
   "main": "src/core/start.js",
   "files": [
     "README.md",
@@ -18,8 +18,15 @@
     "tunnel": "node src/core/index.js"
   },
   "keywords": [
-    "dev tunnel",
+    "DevTunnel-CLI",
+    "DevTunnel",
     "devtunnel",
+    "dev-tunnel",
+    "Dev-Tunnel",
+    "devtunnel-cli",
+    "dev-tunnel-cli",
+    "Dev-Tunnel-CLI",
+    "dev tunnel",
     "localhost tunnel",
     "cloudflare tunnel",
     "ngrok alternative",
