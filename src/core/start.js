@@ -12,6 +12,17 @@ const __dirname = dirname(__filename);
 // Get project root directory dynamically (two levels up from src/core/)
 const PROJECT_ROOT = dirname(dirname(__dirname));
 
+function getPackageVersion() {
+  try {
+    const pkgPath = join(PROJECT_ROOT, "package.json");
+    if (existsSync(pkgPath)) {
+      const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
+      return pkg.version || "3.0.17";
+    }
+  } catch (err) {}
+  return "3.0.17";
+}
+
 // Helper to run command
 function runCommand(command, args = [], cwd = process.cwd()) {
   return new Promise((resolve) => {
@@ -219,7 +230,7 @@ async function main() {
   // Show ASCII logo
   showLogo();
   
-  console.log("DevTunnel v3.0.15");
+  console.log(`DevTunnel v${getPackageVersion()}`);
   console.log("Share your local dev servers worldwide");
   console.log("");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
