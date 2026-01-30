@@ -63,6 +63,9 @@ Test on all platforms if possible:
 3. Ensure code works on multiple platforms
 4. Wait for review and address feedback
 
+#### Releasing (version bump / publish)
+When you bump the CLI version or publish to npm, **also update the website** (DevTunnelPages repo): update the version number and any changed copy in `app/page.tsx`, `app/layout.tsx`, and `SEO.md` so https://devtunnel.vercel.app stays in sync.
+
 ## Project Structure
 
 ```
