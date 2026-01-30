@@ -245,7 +245,7 @@ All notable changes to DevTunnel will be documented in this file.
 - **Improved UI** - Consistent, professional box designs across all platforms
 - **Dynamic Path Detection** - Works with any folder name, handles paths with spaces
 - **Security Policy** - Added SECURITY.md and CODE_OF_CONDUCT.md
-- **Website** - Professional landing page at devtunnel.vercel.app
+- **Website** - Professional landing page at devtunnel-cli.vercel.app
 
 #### Changed
 - Refactored to ES modules for better compatibility

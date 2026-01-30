@@ -32,6 +32,6 @@ jobs:
             - Node, React, Laravel, HTML, PHP/XAMPP
             - Cloudflare, Ngrok, LocalTunnel fallback
             
-            **Website:** https://devtunnel.vercel.app | **GitHub:** https://github.com/maiz-an/DevTunnel
+            **Website:** https://devtunnel-cli.vercel.app | **GitHub:** https://github.com/maiz-an/DevTunnel-CLI
           draft: false
           prerelease: false

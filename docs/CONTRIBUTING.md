@@ -25,8 +25,8 @@ Thank you for your interest in contributing! 🎉
 #### Setup
 ```bash
 # Clone the repo
-git clone https://github.com/maiz-an/DevTunnel.git
-cd DevTunnel
+git clone https://github.com/maiz-an/DevTunnel-CLI.git
+cd DevTunnel-CLI
 
 # Install dependencies
 npm install
@@ -64,7 +64,7 @@ Test on all platforms if possible:
 4. Wait for review and address feedback
 
 #### Releasing (version bump / publish)
-When you bump the CLI version or publish to npm, **also update the website** (DevTunnelPages repo): update the version number and any changed copy in `app/page.tsx`, `app/layout.tsx`, and `SEO.md` so https://devtunnel.vercel.app stays in sync.
+When you bump the CLI version or publish to npm, **also update the website** (DevTunnelPages repo): update the version number and any changed copy in `app/page.tsx`, `app/layout.tsx`, and `SEO.md` so https://devtunnel-cli.vercel.app stays in sync.
 
 ## Project Structure
 

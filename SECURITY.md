@@ -12,7 +12,7 @@
 If you discover a security vulnerability in DevTunnel, please report it by:
 
 1. **DO NOT** open a public issue
-2. Email: [Create a private security advisory](https://github.com/maiz-an/DevTunnel/security/advisories/new)
+2. Email: [Create a private security advisory](https://github.com/maiz-an/DevTunnel-CLI/security/advisories/new)
 3. Include:
    - Description of the vulnerability
    - Steps to reproduce
@@ -59,4 +59,4 @@ We will respond within 48 hours and work to fix the issue promptly.
 ## Questions?
 
 For security questions, open a discussion at:
-https://github.com/maiz-an/DevTunnel/discussions
+https://github.com/maiz-an/DevTunnel-CLI/discussions

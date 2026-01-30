@@ -3,10 +3,10 @@
 **Share your local dev servers worldwide - Zero config tunnel for any framework**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](https://github.com/maiz-an/DevTunnel)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](https://github.com/maiz-an/DevTunnel-CLI)
 [![npm version](https://img.shields.io/npm/v/devtunnel-cli)](https://www.npmjs.com/package/devtunnel-cli)
 
-🌐 **Website:** [devtunnel.vercel.app](https://devtunnel.vercel.app) | 📦 **npm:** [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli) | 💻 **GitHub:** [maiz-an/DevTunnel](https://github.com/maiz-an/DevTunnel)
+🌐 **Website:** [devtunnel-cli.vercel.app](https://devtunnel-cli.vercel.app) | 📦 **npm:** [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli) | 💻 **GitHub:** [maiz-an/DevTunnel-CLI](https://github.com/maiz-an/DevTunnel-CLI)
 
 ---
 
@@ -113,7 +113,7 @@ MIT License - see [LICENSE](docs/LICENSE)
 
 ## 📦 Links
 
-- **Website**: [devtunnel.vercel.app](https://devtunnel.vercel.app)
+- **Website**: [devtunnel-cli.vercel.app](https://devtunnel-cli.vercel.app)
 - **npm**: [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli)
-- **GitHub**: [maiz-an/DevTunnel](https://github.com/maiz-an/DevTunnel)
-- **Issues**: [GitHub Issues](https://github.com/maiz-an/DevTunnel/issues)
+- **GitHub**: [maiz-an/DevTunnel-CLI](https://github.com/maiz-an/DevTunnel-CLI)
+- **Issues**: [GitHub Issues](https://github.com/maiz-an/DevTunnel-CLI/issues)
