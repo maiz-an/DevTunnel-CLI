@@ -17,10 +17,10 @@ function getPackageVersion() {
     const pkgPath = join(PROJECT_ROOT, "package.json");
     if (existsSync(pkgPath)) {
       const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
-      return pkg.version || "3.0.25";
+      return pkg.version || "3.0.26";
     }
   } catch (err) {}
-  return "3.0.25";
+  return "3.0.26";
 }
 
 // Helper to run command
@@ -136,9 +136,17 @@ function detectHtmlProject(currentDir) {
   return { name: basename(currentDir), defaultPort: 5500 }; // Live Server default; matches VS Code
 }
 
+// Detect PHP/XAMPP project (index.php in root, not Laravel)
+function detectPhpProject(currentDir) {
+  if (detectLaravelProject(currentDir)) return null; // Laravel has its own flow
+  const indexPhp = join(currentDir, "index.php");
+  if (!existsSync(indexPhp)) return null;
+  return { name: basename(currentDir), defaultPort: 80 }; // XAMPP/Apache default
+}
+
 // Check common ports for running dev servers (includes Laravel 8000, XAMPP/Live Server 8080/5500)
 async function detectRunningDevServer() {
-  const commonPorts = [3000, 5173, 5500, 8080, 8000, 5000, 4000, 3001, 5174]; // 5500 before 8080 for Live Server
+  const commonPorts = [3000, 5173, 5500, 8080, 8000, 80, 5000, 4000, 3001, 5174]; // 80 for XAMPP
   const detected = [];
   
   for (const port of commonPorts) {
@@ -215,6 +223,18 @@ async function autoDetectProject() {
       name: html.name,
       port: detectedPort,
       projectType: "html"
+    };
+  }
+
+  // 4) PHP/XAMPP (index.php) — default port 80 (Apache), e.g. http://localhost/PeopleQ/
+  const php = detectPhpProject(currentDir);
+  if (php) {
+    const detectedPort = runningPorts.length > 0 ? runningPorts[0] : php.defaultPort;
+    return {
+      path: currentDir,
+      name: php.name,
+      port: detectedPort,
+      projectType: "php"
     };
   }
 
@@ -355,7 +375,9 @@ async function main() {
           ? "Laravel (php artisan serve)"
           : autoDetected.projectType === "html"
             ? "HTML project"
-            : "package.json";
+            : autoDetected.projectType === "php"
+              ? "PHP/XAMPP"
+              : "package.json";
       console.log(`Detected port ${autoDetected.port} (${portSource}), but no server running on that port`);
       console.log("Checking for running dev servers...");
       
@@ -521,15 +543,18 @@ async function main() {
     console.log(`Selected: ${projectPath}`);
     console.log("");
     
-    // Try to detect port for selected project (Laravel → 8000, HTML → 8080, Node from package.json)
+    // Try to detect port for selected project (Laravel → 8000, HTML → 5500, PHP → 80, Node from package.json)
     const selectedPackagePath = join(projectPath, "package.json");
     const laravelSelected = detectLaravelProject(projectPath);
     const htmlSelected = detectHtmlProject(projectPath);
+    const phpSelected = detectPhpProject(projectPath);
     let detectedPort = laravelSelected
       ? laravelSelected.defaultPort
       : htmlSelected
         ? htmlSelected.defaultPort  // 5500
-        : detectPortFromPackage(selectedPackagePath);
+        : phpSelected
+          ? phpSelected.defaultPort  // 80
+          : detectPortFromPackage(selectedPackagePath);
     
     // Check for running servers
     const runningPorts = await detectRunningDevServer();
@@ -557,11 +582,17 @@ async function main() {
   console.log("");
   const proxyPort = devPort + 1000; // Use port 1000 higher for proxy
 
+  // XAMPP subfolder (e.g. htdocs/PeopleQ → http://localhost/PeopleQ/) — proxy rewrites path
+  const isPhpXamppSubfolder =
+    devPort === 80 &&
+    (projectPath.toLowerCase().includes("htdocs") || projectPath.toLowerCase().includes("www"));
+  const basePath = isPhpXamppSubfolder ? "/" + basename(projectPath) : "";
+
   console.log("");
   console.log("Configuration:");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log(`Project: ${projectName}`);
-  console.log(`Dev Server: localhost:${devPort}`);
+  console.log(`Dev Server: localhost:${devPort}${basePath || ""}`);
   console.log(`Proxy Port: ${proxyPort}`);
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("");
@@ -593,7 +624,9 @@ async function main() {
   console.log("Starting services...");
   console.log("");
   const proxyPath = join(__dirname, "proxy-server.js");
-  const proxyProcess = spawn("node", [proxyPath, devPort.toString(), proxyPort.toString(), projectName], {
+  const proxyArgs = [proxyPath, devPort.toString(), proxyPort.toString(), projectName];
+  if (basePath) proxyArgs.push(basePath);
+  const proxyProcess = spawn("node", proxyArgs, {
     stdio: "inherit",
     shell: false
   });

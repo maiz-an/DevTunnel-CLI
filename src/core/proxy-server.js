@@ -8,13 +8,14 @@ process.emitWarning = function (warning, ...args) {
 };
 const { default: httpProxy } = await import("http-proxy");
 
-// Get ports from command line
+// Get ports and optional base path from command line
 const TARGET_PORT = parseInt(process.argv[2]); // Your dev server port
 const PROXY_PORT = parseInt(process.argv[3]);  // Port for tunnel to connect to
 const PROJECT_NAME = process.argv[4] || "Project";
+const BASE_PATH = process.argv[5] || ""; // e.g. /PeopleQ for XAMPP htdocs/PeopleQ
 
 if (!TARGET_PORT || !PROXY_PORT) {
-  console.error("Usage: node proxy-server.js <target-port> <proxy-port> [project-name]");
+  console.error("Usage: node proxy-server.js <target-port> <proxy-port> [project-name] [base-path]");
   process.exit(1);
 }
 
@@ -63,12 +64,22 @@ const server = http.createServer((req, res) => {
     return;
   }
   
+  // XAMPP subfolder: rewrite path so / → /PeopleQ/, /style.css → /PeopleQ/style.css
+  if (BASE_PATH) {
+    const prefix = BASE_PATH.replace(/\/$/, "");
+    req.url = prefix + (req.url === "/" ? "/" : req.url);
+  }
+  
   // Proxy the request
   proxy.web(req, res);
 });
 
 // Handle WebSocket upgrade (for Vite HMR)
 server.on("upgrade", (req, socket, head) => {
+  if (BASE_PATH) {
+    const prefix = BASE_PATH.replace(/\/$/, "");
+    req.url = prefix + (req.url === "/" ? "/" : req.url);
+  }
   proxy.ws(req, socket, head);
 });
 
@@ -78,7 +89,7 @@ server.listen(PROXY_PORT, () => {
   console.log("DevTunnel Proxy Server");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log(`Project: ${PROJECT_NAME}`);
-  console.log(`Dev Server: http://localhost:${TARGET_PORT}`);
+  console.log(`Dev Server: http://localhost:${TARGET_PORT}${BASE_PATH || ""}`);
   console.log(`Proxy Port: ${PROXY_PORT}`);
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("Ready! Tunnel will connect to proxy");
