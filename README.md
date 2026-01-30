@@ -111,13 +111,7 @@ MIT License - see [LICENSE](docs/LICENSE)
 
 ---
 
-## 🔍 Search Keywords
-
-**DevTunnel** | **dev tunnel** | **localhost tunnel** | **cloudflare tunnel** | **ngrok alternative** | **port forwarding** | **local development** | **vite tunnel** | **react dev server** | **nextjs tunnel** | **npm devtunnel** | **share localhost** | **development tools** | **zero config tunnel**
-
----
-
-## 📦 Installation & Links
+## 📦 Links
 
 - **Website**: [devtunnel.vercel.app](https://devtunnel.vercel.app)
 - **npm**: [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli)

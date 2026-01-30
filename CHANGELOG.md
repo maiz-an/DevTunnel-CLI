@@ -2,10 +2,18 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.28] - 2026-01-30
+
+### Changed
+- README: production-only content; removed search keywords section
+- CONTRIBUTING: correct package name (devtunnel-cli)
+- .npmignore: removed references to deleted files
+- GitHub release workflow: concise install/website body
+
 ## [3.0.27] - 2026-01-30
 
 ### Changed
-- **Production cleanup** - Removed internal/reference docs; docs now only Features, Troubleshooting, Contributing, License
+- Docs: only Features, Troubleshooting, Contributing, License (production-ready)
 
 ## [3.0.26] - 2026-01-30
 

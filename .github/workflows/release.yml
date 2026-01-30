@@ -21,34 +21,17 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: DevTunnel ${{ github.ref }}
           body: |
-            # DevTunnel Release
-            
-            ## 🚀 What's New
-            
-            Share your local dev servers worldwide with zero configuration!
-            
-            ## 📦 Installation
-            
+            ## Install
             ```bash
-            git clone https://github.com/maiz-an/DevTunnel.git
-            cd DevTunnel
-            npm install
-            npm start
+            npm install -g devtunnel-cli
             ```
+            Then run `devtunnel-cli` from your project directory.
             
-            ## ✨ Features
-            - 🤖 Fully automatic setup
-            - 🎯 Zero config required
-            - 🔗 Smart proxy for Vite/React/Next.js
-            - 🌍 Cross-platform (Windows, macOS, Linux)
-            - 🔄 Multi-service fallback (Cloudflare, Ngrok, LocalTunnel)
+            ## Features
+            - Zero config, auto-detects project and port
+            - Node, React, Laravel, HTML, PHP/XAMPP
+            - Cloudflare, Ngrok, LocalTunnel fallback
             
-            ## 📖 Documentation
-            
-            Full documentation available in the `docs/` folder.
-            
-            ---
-            
-            **Made with ❤️ for developers worldwide** 🌍
+            **Website:** https://devtunnel.vercel.app | **GitHub:** https://github.com/maiz-an/DevTunnel
           draft: false
           prerelease: false

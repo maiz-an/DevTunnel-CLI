@@ -38,10 +38,7 @@ tests/
 # GitHub files
 .github/
 
-# Other project files
+# Other project files (not needed in npm package)
 CHANGELOG.md
 CODE_OF_CONDUCT.md
 SECURITY.md
-COMPLETE.md
-READY.md
-FINALIZED-SUMMARY.md
