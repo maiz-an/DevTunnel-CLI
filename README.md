@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](https://github.com/maiz-an/DevTunnel-CLI)
 [![npm version](https://img.shields.io/npm/v/devtunnel-cli)](https://www.npmjs.com/package/devtunnel-cli)
 
-🌐 **Website:** [www.devtunnel-cli.mzieos.com](https://www.devtunnel-cli.mzieos.com) | 📦 **npm:** [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli) | 💻 **GitHub:** [maiz-an/DevTunnel-CLI](https://github.com/maiz-an/DevTunnel-CLI)
+🌐 **Website:** [devtunnel-cli.mzieos.com](https://devtunnel-cli.mzieos.com) | 📦 **npm:** [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli) | 💻 **GitHub:** [maiz-an/DevTunnel-CLI](https://github.com/maiz-an/DevTunnel-CLI)
 
 ---
 
@@ -52,6 +52,7 @@ devtunnel-cli    # Auto-detects project type and port!
 - 📄 **HTML** - Default port 5500; built-in static server if none running
 - 🐘 **PHP/XAMPP** - Port 80; supports htdocs subfolders (e.g. http://localhost/YourProject/)
 - 🔄 **Multi-Service** - Cloudflare, Ngrok, LocalTunnel fallback
+- 🔌 **Multiple Ports** - DevTunnel-CLI supports multiple ports; auto-detects or lets you choose
 - 📹 **Streaming Support** - Handles video/audio files (with limitations for large files)
 
 ---
@@ -113,13 +114,13 @@ MIT License - see [LICENSE](docs/LICENSE)
 
 ## 🔍 Search keywords
 
-Find this project as: **DevTunnel**, **devtunnel**, **dev-tunnel**, **Dev-Tunnel**, **DevTunnel-CLI**, **devtunnel-cli**, **dev-tunnel-cli**, **Dev-Tunnel-CLI**. Official site: [www.devtunnel-cli.mzieos.com](https://www.devtunnel-cli.mzieos.com) · GitHub: [maiz-an/DevTunnel-CLI](https://github.com/maiz-an/DevTunnel-CLI) · npm: [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli).
+Find this project as: **DevTunnel**, **devtunnel**, **dev-tunnel**, **Dev-Tunnel**, **DevTunnel-CLI**, **devtunnel-cli**, **dev-tunnel-cli**, **Dev-Tunnel-CLI**. Official site: [devtunnel-cli.mzieos.com](https://devtunnel-cli.mzieos.com) · GitHub: [maiz-an/DevTunnel-CLI](https://github.com/maiz-an/DevTunnel-CLI) · npm: [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli).
 
 ---
 
 ## 📦 Links
 
-- **Website**: [www.devtunnel-cli.mzieos.com](https://www.devtunnel-cli.mzieos.com)
+- **Website**: [devtunnel-cli.mzieos.com](https://devtunnel-cli.mzieos.com)
 - **npm**: [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli)
 - **GitHub**: [maiz-an/DevTunnel-CLI](https://github.com/maiz-an/DevTunnel-CLI)
 - **Issues**: [GitHub Issues](https://github.com/maiz-an/DevTunnel-CLI/issues)

@@ -32,6 +32,6 @@ jobs:
             - Node, React, Laravel, HTML, PHP/XAMPP
             - Cloudflare, Ngrok, LocalTunnel fallback
             
-            **Website:** https://www.devtunnel-cli.mzieos.com | **GitHub:** https://github.com/maiz-an/DevTunnel-CLI
+            **Website:** https://devtunnel-cli.mzieos.com | **GitHub:** https://github.com/maiz-an/DevTunnel-CLI
           draft: false
           prerelease: false

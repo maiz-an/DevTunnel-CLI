@@ -6,7 +6,8 @@
 
 - Auto-installs Cloudflare (if not present)
 - Auto-installs npm dependencies
-- Auto-detects dev server
+- Auto-detects dev server and port
+- **Supports multiple ports** — auto-detects or choose (3000, 8000, 5500, 80, etc.)
 - Zero manual configuration
 
 ### 🔗 Smart Proxy System

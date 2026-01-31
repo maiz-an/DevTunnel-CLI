@@ -272,7 +272,7 @@ async function main() {
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("Repository: https://github.com/maiz-an/DevTunnel-CLI");
   console.log("npm Package: https://www.npmjs.com/package/devtunnel-cli");
-  console.log("Website: https://www.devtunnel-cli.mzieos.com");
+  console.log("Website: https://devtunnel-cli.mzieos.com");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("");
 
