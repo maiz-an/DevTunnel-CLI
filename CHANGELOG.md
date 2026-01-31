@@ -2,6 +2,12 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.33] - 2026-01-30
+
+### Changed
+- **npm & website** - Canonical URL without www: devtunnel-cli.mzieos.com everywhere; website redirects www → non-www
+- **Contributor** - .mailmap and CONTRIBUTING note so automated commits can be attributed to main author
+
 ## [3.0.32] - 2026-01-30
 
 ### Changed

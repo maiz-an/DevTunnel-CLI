@@ -77,6 +77,11 @@ Test on all platforms if possible:
 
 Then: commit & push CLI repo → `npm publish` → commit & push website repo. Do not skip the website.
 
+#### Contributor list (no bots / automation)
+- Prefer committing and pushing yourself so only your identity appears as contributor.
+- **npm:** To remove a collaborator (e.g. automation), go to [npm package](https://www.npmjs.com/package/devtunnel-cli) → Package settings → Collaborators.
+- **GitHub:** To merge an existing bot/automation identity into your name in the contributors list, add a line in `.mailmap`: `Your Name <your@email> Bot Name <bot@email>`. Get the bot name/email from `git log`.
+
 ## Project Structure
 
 ```
