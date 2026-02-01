@@ -112,7 +112,21 @@ devtunnel-cli</code></pre>
   </ul>
 
   <hr>
-  <p><small>Version 3.0.40 | Made with ❤︎ for developers worldwide</small></p>
+  <p><small>Version <span id="pkg-version">3.0.40</span> | Made with ❤︎ for developers worldwide</small></p>
+
+  <script>
+    (async function(){
+      try {
+        const res = await fetch('https://registry.npmjs.org/devtunnel-cli');
+        if (!res.ok) return;
+        const data = await res.json();
+        const latest = data && data['dist-tags'] && data['dist-tags'].latest;
+        if (latest) document.getElementById('pkg-version').textContent = latest;
+      } catch (e) {
+        // keep static version if fetch fails
+      }
+    })();
+  </script>
 </body>
 
 </html>
