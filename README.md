@@ -96,32 +96,6 @@ devtunnel-cli
 
 ---
 
-
-## 🆚 Comparison: DevTunnel-CLI vs. Enterprise Tunnels
-
-DevTunnel-CLI is optimized for **speed and simplicity** rather than governance and authentication.
-
-| Feature | DevTunnel-CLI | Enterprise Tunnels (e.g., Microsoft Dev Tunnels) |
-|---------|---------------|--------------------------------------------------|
-| **Setup Time** | Instant (0 config) | Requires account, authentication setup |
-| **Authentication** | None (by design) | User-based auth, SSO, identity management |
-| **Access Control** | URL possession only | Fine-grained permissions, user/group policies |
-| **Use Case** | Development, testing, demos | Enterprise dev, governed access, compliance |
-| **Speed** | Instant sharing | May require approval workflows |
-| **Ideal For** | Solo devs, small teams, fast iteration | Large orgs, regulated industries, prod-like envs |
-
-**Choose DevTunnel-CLI when:**
-- You need instant, frictionless sharing
-- You're working on non-sensitive development projects
-- Speed and simplicity are priorities
-
-**Choose enterprise tunnels when:**
-- You need identity-based access control
-- You're in a regulated or compliance-heavy environment
-- You need audit logs and governance
-
----
-
 ## 📖 Documentation
 
 - [Features](docs/FEATURES.md)
