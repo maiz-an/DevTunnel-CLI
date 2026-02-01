@@ -1,5 +1,21 @@
 # ✨ Features Guide
 
+## 🎯 Purpose & Scope
+
+DevTunnel-CLI is a development tool designed for:
+- **Development & Testing**: Share local work with teammates
+- **Mobile Testing**: Test apps on real devices without deployment
+- **Client Demos**: Show work-in-progress features instantly
+- **Webhook Debugging**: Test third-party webhooks on localhost
+
+**This tool is intentionally NOT designed for:**
+- Production environments
+- Long-lived public services
+- Hosting production traffic
+- Applications requiring authentication
+
+---
+
 ## Core Features
 
 ### 🤖 Fully Automatic Setup
@@ -199,6 +215,83 @@ Works with any frontend!
 2. Keep dev server and tunnel on same machine
 3. Use wired connection over WiFi
 4. Close unnecessary apps
+
+---
+
+## 🔒 Security & Access Model
+
+**Intentional Design Choices:**
+
+### No Authentication (By Design)
+- DevTunnel-CLI intentionally does NOT use authentication or access control
+- This is a deliberate choice to ensure fast, frictionless development workflows
+- Access is granted by **URL possession only** — anyone with the URL can access the tunnel
+
+### Temporary URL Behavior
+- URLs are **short-lived** and **unlisted**
+- New random URLs generated each session
+- URLs are **destroyed** when the tunnel stops
+- Not indexed by search engines
+
+### Why This Design?
+- **Instant sharing**: No account setup, no login flows
+- **Zero friction**: Run one command and share immediately
+- **Maximum speed**: Perfect for rapid development and testing
+
+### Best Practices
+- ✅ Only share URLs with trusted collaborators
+- ✅ Stop tunnels when not in use
+- ✅ Never expose sensitive data or production databases
+- ✅ Use only for development and testing
+
+---
+
+## ⚠️ Limitations & Design Constraints
+
+DevTunnel-CLI has intentional limitations that optimize it for development speed:
+
+### Intentional Limitations
+- **No identity-based access control** — Anyone with the URL can access
+- **No user-level permission management** — All or nothing access model
+- **Not suitable for production** — Designed for temporary development use only
+- **Temporary URLs only** — URLs do not persist across sessions
+
+### What DevTunnel-CLI IS
+- ✅ A rapid development tool
+- ✅ Perfect for testing and demos
+- ✅ Ideal for webhook debugging
+- ✅ Great for team collaboration
+
+### What DevTunnel-CLI IS NOT
+- ❌ A production hosting solution
+- ❌ An authentication/authorization system
+- ❌ A permanent URL service
+- ❌ An enterprise-grade tunnel with governance
+
+---
+
+## 🆚 DevTunnel-CLI vs. Enterprise Tunnels
+
+**DevTunnel-CLI** is optimized for **speed and simplicity**.
+**Enterprise tunnels** (e.g., Microsoft Dev Tunnels) are optimized for **governance and security**.
+
+| Aspect | DevTunnel-CLI | Enterprise Tunnels |
+|--------|---------------|-------------------|
+| **Authentication** | None (by design) | Required (SSO, OAuth, identity) |
+| **Access Control** | URL possession only | User/group-based permissions |
+| **Setup Time** | Instant (0 config) | Requires account & auth setup |
+| **Use Case** | Dev, testing, demos | Enterprise dev, compliance |
+| **Ideal For** | Speed & simplicity | Governance & audit trails |
+
+**Use DevTunnel-CLI when:**
+- You need instant, frictionless sharing
+- You're working on non-sensitive projects
+- Speed is more important than governance
+
+**Use enterprise tunnels when:**
+- You need identity-based access control
+- Your org requires audit logs and compliance
+- You're in a regulated industry
 
 ---
 

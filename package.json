@@ -1,8 +1,8 @@
 {
   "name": "devtunnel-cli",
-  "version": "3.0.35",
+  "version": "3.0.36",
   "type": "module",
-  "description": "DevTunnel-CLI (DevTunnel, devtunnel, dev-tunnel) - Share local dev servers worldwide. Zero config, supports multiple ports. npm install -g devtunnel-cli. Works with Vite, React, Laravel, HTML, PHP/XAMPP.",
+  "description": "DevTunnel-CLI (DevTunnel, devtunnel, dev-tunnel) - Development tool for sharing local servers worldwide. Zero config, supports multiple ports. For dev, testing, demos, webhook debugging. Not for production. npm install -g devtunnel-cli. Works with Vite, React, Laravel, HTML, PHP/XAMPP.",
   "main": "src/core/start.js",
   "files": [
     "README.md",

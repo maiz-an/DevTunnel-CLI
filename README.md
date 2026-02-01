@@ -10,6 +10,19 @@
 
 ---
 
+## 🎯 Purpose & Scope
+
+DevTunnel-CLI is designed for **DEVELOPMENT**, **TESTING**, **DEMOS**, and **WEBHOOK DEBUGGING**. It provides fast, frictionless access to your local dev servers from anywhere.
+
+**This tool is NOT intended for:**
+- Production environments
+- Long-lived public services
+- Hosting production traffic
+
+DevTunnel-CLI is built for developers who need instant, temporary public URLs to share work-in-progress, test on mobile devices, demo features to clients, or debug webhooks from third-party services.
+
+---
+
 ## ⚡ Quick Start
 
 ### Step-by-Step Guide
@@ -80,6 +93,92 @@ devtunnel-cli
 ```
 
 **Works with:** Vite, React, Next.js, Express, NestJS, Laravel, plain HTML, PHP/XAMPP, and any HTTP/HTTPS server.
+
+---
+
+## 🔒 Security & Access Model
+
+DevTunnel-CLI intentionally **does NOT use authentication or access control**. This is a deliberate design choice to ensure fast, frictionless development workflows.
+
+**How Access Works:**
+- Anyone with the generated temporary URL can access the tunnel until it is stopped
+- No login, password, or identity verification required
+- Access is limited by **possession of the URL only**
+
+**Why This Design?**
+- **Speed**: Get public URLs instantly without authentication setup
+- **Simplicity**: Zero configuration — just run and share
+- **Friction-free collaboration**: Share with teammates without managing accounts or permissions
+
+**Temporary URL Behavior:**
+- URLs are **short-lived** and **unlisted**
+- URLs are **destroyed** when the tunnel stops
+- New random URLs are generated each time you run DevTunnel-CLI
+- URLs are not indexed by search engines
+
+**Best Practices:**
+- Only share URLs with trusted collaborators
+- Stop the tunnel when not in use
+- Never expose sensitive data or production databases through DevTunnel-CLI
+- Use for development and testing only
+
+---
+
+## ⚠️ Limitations
+
+DevTunnel-CLI has intentional limitations that make it ideal for development but unsuitable for other use cases:
+
+### No Authentication or Access Control
+- **By design**: No identity-based access control
+- **By design**: No user-level permission management
+- **By design**: No password protection or login system
+- Anyone with the URL can access your tunnel
+
+### Not Suitable For
+- ❌ Production environments
+- ❌ Long-lived public services
+- ❌ Hosting production traffic
+- ❌ Sensitive data exposure
+- ❌ Public-facing applications
+
+### Perfect For
+- ✅ Development and testing
+- ✅ Team collaboration and code reviews
+- ✅ Mobile device testing
+- ✅ Client demos and work-in-progress sharing
+- ✅ Webhook debugging with third-party services
+- ✅ Temporary public access to localhost
+
+### File Size & Streaming Limits
+- ✅ Small files (<10MB): Works perfectly
+- ✅ Medium files (10-50MB): Works well, may have slight delays
+- ⚠️ Large files (>50MB): May timeout depending on connection speed
+- ⚠️ Very large files (>100MB): Not recommended for Cloudflare free tier
+
+---
+
+## 🆚 Comparison: DevTunnel-CLI vs. Enterprise Tunnels
+
+DevTunnel-CLI is optimized for **speed and simplicity** rather than governance and authentication.
+
+| Feature | DevTunnel-CLI | Enterprise Tunnels (e.g., Microsoft Dev Tunnels) |
+|---------|---------------|--------------------------------------------------|
+| **Setup Time** | Instant (0 config) | Requires account, authentication setup |
+| **Authentication** | None (by design) | User-based auth, SSO, identity management |
+| **Access Control** | URL possession only | Fine-grained permissions, user/group policies |
+| **Use Case** | Development, testing, demos | Enterprise dev, governed access, compliance |
+| **Speed** | Instant sharing | May require approval workflows |
+| **Ideal For** | Solo devs, small teams, fast iteration | Large orgs, regulated industries, prod-like envs |
+
+**Choose DevTunnel-CLI when:**
+- You need instant, frictionless sharing
+- You're working on non-sensitive development projects
+- Speed and simplicity are priorities
+
+**Choose enterprise tunnels when:**
+- You need identity-based access control
+- You're in a regulated or compliance-heavy environment
+- You need audit logs and governance
 
 ---
 
