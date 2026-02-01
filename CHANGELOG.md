@@ -2,6 +2,11 @@
 
 All notable changes to DevTunnel will be documented in this file.
 
+## [3.0.35] - 2026-01-30
+
+### Changed
+- **Website** - maizan.me/devtunnel-cli proxied from devtunnel-cli.vercel.app. All references updated; no mzieos.com.
+
 ## [3.0.34] - 2026-01-30
 
 ### Changed
