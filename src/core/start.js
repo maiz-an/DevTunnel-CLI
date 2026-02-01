@@ -17,10 +17,10 @@ function getPackageVersion() {
     const pkgPath = join(PROJECT_ROOT, "package.json");
     if (existsSync(pkgPath)) {
       const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
-      return pkg.version || "3.0.37";
+      return pkg.version || "3.0.38";
     }
   } catch (err) {}
-  return "3.0.37";
+  return "3.0.38";
 }
 
 // Helper to run command
