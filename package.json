@@ -15,7 +15,8 @@
     "start": "node src/core/RUN.js",
     "dev": "node src/core/RUN.js",
     "run": "node src/core/RUN.js",
-    "tunnel": "node src/core/index.js"
+    "tunnel": "node src/core/index.js",
+    "sync-version": "node sync-version.js"
   },
   "keywords": [
     "DevTunnel-CLI",
