@@ -1,0 +1,33 @@
+name: Publish to GitHub Packages
+
+on:
+  release:
+    types: [published]   # triggers only when a release is published
+
+permissions:
+  contents: read
+  packages: write        # needed to publish to GitHub Packages
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout your repo
+      - uses: actions/checkout@v4
+
+      # 2️⃣ Setup Node and GitHub Packages registry
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com
+
+      # 3️⃣ Install dependencies
+      - run: npm install
+
+      # 4️⃣ Publish to GitHub Packages
+      - name: Publish to GitHub Packages
+        run: |
+          npm publish --registry=https://npm.pkg.github.com --access=public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
