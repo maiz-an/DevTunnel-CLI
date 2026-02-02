@@ -12,20 +12,90 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Create Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          tag_name: ${{ github.ref_name }}
-          release_name: DevTunnel ${{ github.ref_name }}
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get version
+        id: ver
+        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Build standalone binaries
+        run: npm run build:standalone
+
+      - name: Package Windows portable zip
+        run: |
+          mkdir -p out/win
+          cp dist/*-win-x64.exe out/win/ 2>/dev/null || cp dist/*-win-x64 out/win/ 2>/dev/null || true
+          for f in out/win/*-win-x64*; do
+            [ -f "$f" ] || continue
+            base=$(echo "$(basename "$f")" | sed 's/-win-x64\.exe$//;s/-win-x64$//')
+            mv "$f" "out/win/${base}.exe"
+          done
+          cp package.json out/win/
+          cd out/win && zip -r ../../devtunnel-cli-${{ steps.ver.outputs.VERSION }}-portable.zip . && cd ../..
+
+      - name: Package Linux tarball
+        run: |
+          mkdir -p out/linux
+          for b in devtunnel-cli devtunnel-cli-static-server devtunnel-cli-proxy devtunnel-cli-tunnel; do
+            [ -f dist/${b}-linux-x64 ] && cp dist/${b}-linux-x64 out/linux/${b} && chmod +x out/linux/${b}
+          done
+          cp package.json out/linux/
+          cd out/linux && tar czvf ../../devtunnel-cli-${{ steps.ver.outputs.VERSION }}-linux-x64.tar.gz . && cd ../..
+
+      - name: Package macOS tarballs
+        run: |
+          mkdir -p out/macos-x64 out/macos-arm64
+          for b in devtunnel-cli devtunnel-cli-static-server devtunnel-cli-proxy devtunnel-cli-tunnel; do
+            [ -f dist/${b}-macos-x64 ] && cp dist/${b}-macos-x64 out/macos-x64/${b} && chmod +x out/macos-x64/${b}
+            [ -f dist/${b}-macos-arm64 ] && cp dist/${b}-macos-arm64 out/macos-arm64/${b} && chmod +x out/macos-arm64/${b}
+          done
+          cp package.json out/macos-x64/ out/macos-arm64/
+          cd out/macos-x64 && tar czvf ../../devtunnel-cli-${{ steps.ver.outputs.VERSION }}-darwin-x64.tar.gz . && cd ../..
+          cd out/macos-arm64 && tar czvf ../../devtunnel-cli-${{ steps.ver.outputs.VERSION }}-darwin-arm64.tar.gz . && cd ../..
+
+      - name: Build .deb and APT repo
+        run: node scripts/build-deb-apt.js
+
+      - name: Deploy APT repo to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./apt
+          publish_branch: gh-pages
+          force_orphan: false
+          keep_files: true
+
+      - name: Create Release and upload assets
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: false
+          prerelease: false
+          files: |
+            devtunnel-cli-${{ steps.ver.outputs.VERSION }}-portable.zip
+            devtunnel-cli-${{ steps.ver.outputs.VERSION }}-linux-x64.tar.gz
+            devtunnel-cli-${{ steps.ver.outputs.VERSION }}-darwin-x64.tar.gz
+            devtunnel-cli-${{ steps.ver.outputs.VERSION }}-darwin-arm64.tar.gz
+            devtunnel-cli_${{ steps.ver.outputs.VERSION }}_amd64.deb
           body: |
-            ## Install
-            ```bash
-            npm i -g devtunnel-cli
-            ```
+            ## Install (standalone — no Node required)
+
+            | Platform | Command |
+            | -------- | ------- |
+            | **Windows** | `winget install devtunnel-cli` or download the portable zip below |
+            | **macOS** | `brew install devtunnel-cli` or download the darwin tarball for your arch |
+            | **Linux (Debian/Ubuntu)** | Run the [install script](https://raw.githubusercontent.com/maiz-an/DevTunnel-CLI/main/scripts/install.sh) once, then `sudo apt install devtunnel-cli` |
+            | **Other Linux** | Use the install script or download the linux tarball below |
+            | **npm** | `npm i -g devtunnel-cli` (requires Node.js) |
+
             Then run `devtunnel-cli` from your project directory.
 
             ## Features
@@ -33,6 +103,6 @@ jobs:
             - Node, React, Laravel, HTML, PHP/XAMPP
             - Cloudflare, Ngrok, LocalTunnel fallback
 
-            **Website:** https://devtunnel-cli.vercel.app | **GitHub:** https://github.com/maiz-an/DevTunnel-CLI
-          draft: false
-          prerelease: false
+            **Website:** https://devtunnel-cli.vercel.app · **GitHub:** https://github.com/maiz-an/DevTunnel-CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

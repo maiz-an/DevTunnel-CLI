@@ -1,6 +1,6 @@
 {
   "name": "devtunnel-cli",
-  "version": "3.0.45",
+  "version": "3.1.0",
   "type": "module",
   "description": "DevTunnel-CLI — fast, zero-config tool to share local servers for development, testing, demos, and webhook debugging. npm i -g devtunnel-cli.",
   "main": "src/core/start.js",
@@ -17,6 +17,7 @@
     "run": "node src/core/RUN.js",
     "tunnel": "node src/core/index.js",
     "sync-version": "node sync-version.js",
+    "build:standalone": "node scripts/build-standalone.js",
     "test": "node -e \"console.log('ok')\"",
     "prepublishOnly": "npm test",
     "postinstall": "node src/utils/postinstall-global-check.cjs"
@@ -83,5 +84,7 @@
     "localtunnel": "^2.0.2",
     "prompts": "^2.4.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@yao-pkg/pkg": "^5.15.0"
+  }
 }

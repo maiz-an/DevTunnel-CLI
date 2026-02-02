@@ -1,0 +1,21 @@
+# WinGet default locale manifest for DevTunnel-CLI
+PackageIdentifier: DevTunnel.DevTunnelCLI
+PackageVersion: 3.1.0
+PackageLocale: en-US
+Publisher: DevTunnel
+PublisherUrl: https://devtunnel-cli.vercel.app
+PackageName: DevTunnel-CLI
+PackageUrl: https://devtunnel-cli.vercel.app
+License: MIT
+LicenseUrl: https://github.com/maiz-an/DevTunnel-CLI/blob/main/docs/LICENSE
+ShortDescription: Share your local dev servers worldwide. Zero config tunnel for any framework.
+Moniker: devtunnel-cli
+Tags:
+  - devtunnel
+  - tunnel
+  - localhost
+  - cloudflare
+  - development
+  - cli
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0

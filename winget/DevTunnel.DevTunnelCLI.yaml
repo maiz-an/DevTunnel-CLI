@@ -1,0 +1,7 @@
+# WinGet version manifest for DevTunnel-CLI
+# Submit to https://github.com/microsoft/winget-pkgs under manifests/d/DevTunnel/DevTunnelCLI/<version>/
+PackageIdentifier: DevTunnel.DevTunnelCLI
+PackageVersion: 3.1.0
+DefaultLocale: en-US
+ManifestType: version
+ManifestVersion: 1.6.0
