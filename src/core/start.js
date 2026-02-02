@@ -86,24 +86,36 @@ async function waitForServerReady(port, timeoutMs = 10000) {
   return false;
 }
 
-// Detect port from package.json
+// Detect port from package.json (parse --port / PORT= from script first, then vite.config, then framework defaults)
 function detectPortFromPackage(packagePath) {
   try {
     if (!existsSync(packagePath)) return null;
     const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
     const scripts = packageJson.scripts || {};
 
-    // Check for common dev commands
     const devScript = scripts.dev || scripts.start || scripts.serve;
     if (!devScript) return null;
 
-    // Try to extract port from script
-    const portMatch = devScript.match(/--port\s+(\d+)|:(\d+)|port[=:](\d+)/i);
-    if (portMatch) {
-      return parseInt(portMatch[1] || portMatch[2] || portMatch[3]);
+    // Explicit --port or --port= in script (Vite, Next, etc.) takes priority
+    const explicitPort = devScript.match(/(?:--port[\s=]+|--port=)(\d+)/i);
+    if (explicitPort) {
+      const p = parseInt(explicitPort[1], 10);
+      if (p >= 1 && p <= 65535) return p;
     }
 
-    // Default ports based on framework
+    // PORT=3000 or port=3000 at start of script (e.g. "PORT=3000 vite")
+    const envPort = devScript.match(/(?:^|\s)(?:PORT|port)[\s=]+(\d+)/i);
+    if (envPort) {
+      const p = parseInt(envPort[1], 10);
+      if (p >= 1 && p <= 65535) return p;
+    }
+
+    // Vite: try vite.config.js/ts server.port
+    const dir = dirname(packagePath);
+    const vitePort = detectViteConfigPort(dir);
+    if (vitePort != null) return vitePort;
+
+    // Default ports by framework
     if (devScript.includes('vite')) return 5173;
     if (devScript.includes('next')) return 3000;
     if (devScript.includes('react-scripts')) return 3000;
@@ -113,6 +125,42 @@ function detectPortFromPackage(packagePath) {
     return null;
   } catch (err) {
     return null;
+  }
+}
+
+// Read server.port from vite.config.js or vite.config.ts (simple regex, no eval)
+function detectViteConfigPort(dir) {
+  for (const name of ['vite.config.js', 'vite.config.ts', 'vite.config.mjs', 'vite.config.cjs']) {
+    const path = join(dir, name);
+    if (!existsSync(path)) continue;
+    try {
+      const content = readFileSync(path, 'utf8');
+      const m = content.match(/server\s*:\s*\{[^}]*port\s*:\s*(\d+)/s);
+      if (m) {
+        const p = parseInt(m[1], 10);
+        if (p >= 1 && p <= 65535) return p;
+      }
+    } catch (_) { }
+  }
+  return null;
+}
+
+// True if project has a Node dev server (vite, next, etc.) — don't start our static server
+function hasNodeDevServer(projectPath) {
+  // Vite: presence of vite.config.* means dev server project (never use built-in static server)
+  if (existsSync(join(projectPath, 'vite.config.js')) || existsSync(join(projectPath, 'vite.config.ts')) ||
+    existsSync(join(projectPath, 'vite.config.mjs')) || existsSync(join(projectPath, 'vite.config.cjs'))) {
+    return true;
+  }
+  const packagePath = join(projectPath, 'package.json');
+  if (!existsSync(packagePath)) return false;
+  try {
+    const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
+    const scripts = packageJson.scripts || {};
+    const devScript = (scripts.dev || scripts.start || scripts.serve || '').toLowerCase();
+    return /vite|next|react-scripts|webpack|nuxt|svelte|quasar|express/.test(devScript);
+  } catch {
+    return false;
   }
 }
 
@@ -145,34 +193,44 @@ function detectPhpProject(currentDir) {
   return { name: basename(currentDir), defaultPort: 80 }; // XAMPP/Apache default
 }
 
-// Check common ports for running dev servers (includes Laravel 8000, XAMPP/Live Server 8080/5500)
+// HTTP GET with timeout; returns status code or null (robust for all OSes)
+function httpGetStatus(port, timeoutMs = 4000) {
+  return new Promise((resolve) => {
+    const req = http.get(`http://127.0.0.1:${port}`, { timeout: timeoutMs }, (res) => {
+      res.on('data', () => { });
+      res.on('end', () => resolve(res.statusCode));
+      res.on('error', () => resolve(null));
+    });
+    req.on('error', () => resolve(null));
+    req.on('timeout', () => {
+      req.destroy();
+      resolve(null);
+    });
+    if (req.setTimeout) req.setTimeout(timeoutMs);
+  });
+}
+
+// Check common ports for running dev servers (3000/5173 first — Vite/Next often use these)
 async function detectRunningDevServer() {
-  const commonPorts = [3000, 5173, 5500, 8080, 8000, 80, 5000, 4000, 3001, 5174]; // 80 for XAMPP
+  const commonPorts = [3000, 5173, 5500, 8080, 8000, 80, 5000, 4000, 3001, 5174];
   const detected = [];
+  const requestTimeoutMs = 4000;
 
   for (const port of commonPorts) {
     const inUse = await checkPortInUse(port);
-    if (inUse) {
-      // Try to verify it's actually a dev server by making a request
-      try {
-        const response = await new Promise((resolve) => {
-          const req = http.get(`http://localhost:${port}`, { timeout: 2000 }, (res) => {
-            resolve(res.statusCode);
-          });
-          req.on('error', () => resolve(null));
-          req.on('timeout', () => {
-            req.destroy();
-            resolve(null);
-          });
-        });
-        // If we get any HTTP response, it's likely a dev server
-        if (response !== null) {
-          detected.push(port);
-        }
-      } catch (err) {
-        // Port is in use, add it anyway (might be a dev server)
+    if (!inUse) continue;
+    try {
+      const status = await Promise.race([
+        httpGetStatus(port, requestTimeoutMs),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), requestTimeoutMs + 500))
+      ]).catch(() => null);
+      // Any HTTP response (2xx/3xx/4xx/5xx) means a server is there
+      if (status != null && status >= 0) {
         detected.push(port);
       }
+    } catch {
+      // Port in use but HTTP failed — still list it (user may have started server just now)
+      detected.push(port);
     }
   }
 
@@ -615,11 +673,12 @@ async function main() {
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("");
 
-  // For HTML projects with no server running: start built-in static server and confirm it works
+  // Only start built-in static server for plain HTML (no Vite/Next/etc) when port is free
   let staticServerProcess = null;
   const isHtmlProject = !!detectHtmlProject(projectPath);
+  const hasDevServer = hasNodeDevServer(projectPath);
   const portInUseNow = await checkPortInUse(devPort);
-  if (isHtmlProject && !portInUseNow) {
+  if (isHtmlProject && !hasDevServer && !portInUseNow) {
     console.log("Starting built-in static server for HTML project...");
     const staticServerPath = join(__dirname, "static-server.js");
     const nodeBin = process.execPath;
@@ -673,9 +732,9 @@ async function main() {
   // Handle cleanup
   const cleanup = () => {
     console.log("\nShutting down...");
-    if (staticServerProcess) try { staticServerProcess.kill(); } catch (_) {}
-    try { proxyProcess.kill(); } catch (_) {}
-    try { tunnelProcess.kill(); } catch (_) {}
+    if (staticServerProcess) try { staticServerProcess.kill(); } catch (_) { }
+    try { proxyProcess.kill(); } catch (_) { }
+    try { tunnelProcess.kill(); } catch (_) { }
     process.exit(0);
   };
 

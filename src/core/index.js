@@ -42,28 +42,28 @@ console.log("");
 async function fixViteConfigForCloudflare() {
   const viteConfigPath = join(PROJECT_PATH, "vite.config.js");
   const viteConfigTsPath = join(PROJECT_PATH, "vite.config.ts");
-  
+
   let configPath = null;
   if (existsSync(viteConfigPath)) configPath = viteConfigPath;
   else if (existsSync(viteConfigTsPath)) configPath = viteConfigTsPath;
-  
+
   if (!configPath) return false;
-  
+
   try {
     let config = readFileSync(configPath, "utf-8");
-    
+
     // Check if already configured for external access
-    if (config.includes("host: true") || config.includes("host:true") || 
-        config.includes("host: '0.0.0.0'") || config.includes('host: "0.0.0.0"') ||
-        config.includes('host:"0.0.0.0"') || config.includes("host:'0.0.0.0'")) {
+    if (config.includes("host: true") || config.includes("host:true") ||
+      config.includes("host: '0.0.0.0'") || config.includes('host: "0.0.0.0"') ||
+      config.includes('host:"0.0.0.0"') || config.includes("host:'0.0.0.0'")) {
       console.log("✅ Vite config already allows external access\n");
       return true;
     }
-    
+
     console.log("📝 Auto-fixing Vite config for tunnel access...");
-    
+
     let newConfig = config;
-    
+
     // Case 1: Has existing server config
     if (config.includes("server:") || config.includes("server :")) {
       // Add host inside existing server block
@@ -86,7 +86,7 @@ async function fixViteConfigForCloudflare() {
         `export default {\n  server: {\n    host: true, // Allow tunnel access\n  },`
       );
     }
-    
+
     if (newConfig !== config) {
       // Backup original
       writeFileSync(configPath + ".backup", config);
@@ -100,13 +100,13 @@ async function fixViteConfigForCloudflare() {
       console.log("   3. Then run this tool again");
       console.log("\nBackup saved: " + configPath + ".backup");
       console.log("=".repeat(60) + "\n");
-      
+
       // Wait for user to acknowledge
       console.log("Press Ctrl+C to exit and restart your dev server...\n");
       await new Promise(resolve => setTimeout(resolve, 60000)); // Wait 60 seconds
       return true;
     }
-    
+
     console.log("⚠️  Could not auto-fix config. You may need to manually add:\n");
     console.log("   server: { host: true }\n");
     return false;
@@ -184,7 +184,7 @@ async function tryTunnelServices() {
   console.log("");
 
   let hasCloudflare = false;
-  
+
   // Check if Cloudflare is available
   for (const service of TUNNEL_SERVICES) {
     if (service.name === "Cloudflare" && await service.available()) {
@@ -192,7 +192,7 @@ async function tryTunnelServices() {
       break;
     }
   }
-  
+
   // Show tip if Cloudflare not installed
   if (!hasCloudflare) {
     console.log("TIP: Install Cloudflare for best experience (no password, fastest)");
@@ -201,20 +201,20 @@ async function tryTunnelServices() {
 
   for (const service of TUNNEL_SERVICES) {
     const available = await service.available();
-    
+
     if (available) {
       console.log(`${service.name} is available`);
-      
+
       // Show warning if exists
       if (service.warning) {
         console.log(service.warning);
       }
-      
+
       // Skip Vite auto-fix - using proxy server instead
-      
+
       console.log(`Starting ${service.name} tunnel...`);
       console.log("");
-      
+
       currentTunnelType = service.name;
       tunnelProcess = spawn(service.command, service.args, {
         shell: true,
@@ -227,10 +227,10 @@ async function tryTunnelServices() {
       });
 
       setupTunnelHandlers(service.name);
-      
+
       // Wait a bit to see if tunnel starts successfully
       await new Promise(resolve => setTimeout(resolve, 3000));
-      
+
       // Check if process is still running
       if (tunnelProcess && !tunnelProcess.killed) {
         console.log(`Successfully connected via ${service.name}!`);
@@ -263,7 +263,7 @@ function setupTunnelHandlers(serviceName) {
   tunnelProcess.stdout.on("data", (data) => {
     const output = data.toString();
     const lines = output.split("\n");
-    
+
     lines.forEach(line => {
       const trimmed = line.trim();
       if (!trimmed) return;
@@ -282,6 +282,7 @@ function setupTunnelHandlers(serviceName) {
             console.log(url);
             console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             console.log("Share this URL with anyone!");
+            console.log("If you see a white screen, wait a few seconds and refresh.");
             console.log("");
           }
         }
@@ -297,6 +298,7 @@ function setupTunnelHandlers(serviceName) {
           console.log("PUBLIC URL:");
           console.log(url);
           console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+          console.log("If you see a white screen, wait a few seconds and refresh.");
           console.log("");
         }
       } else {
@@ -310,6 +312,7 @@ function setupTunnelHandlers(serviceName) {
             console.log("PUBLIC URL:");
             console.log(url);
             console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            console.log("If you see a white screen, wait a few seconds and refresh.");
             console.log("");
           }
         }
@@ -319,7 +322,7 @@ function setupTunnelHandlers(serviceName) {
 
   tunnelProcess.stderr?.on("data", (data) => {
     const output = data.toString();
-    
+
     // For Cloudflare, check if URL is in stderr (sometimes it is)
     if (serviceName === "Cloudflare" && output.includes("trycloudflare.com")) {
       const urlMatch = output.match(/(https?:\/\/[^\s]+trycloudflare\.com[^\s]*)/);
@@ -331,10 +334,11 @@ function setupTunnelHandlers(serviceName) {
         console.log(url);
         console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         console.log("Share this URL with anyone!");
+        console.log("If you see a white screen, wait a few seconds and refresh.");
         console.log("");
       }
     }
-    
+
     // Only show errors, not info messages
     if (!output.includes("INF") && !output.includes("WRN")) {
       const trimmed = output.trim();
