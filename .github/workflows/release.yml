@@ -58,7 +58,8 @@ jobs:
             [ -f dist/${b}-macos-x64 ] && cp dist/${b}-macos-x64 out/macos-x64/${b} && chmod +x out/macos-x64/${b}
             [ -f dist/${b}-macos-arm64 ] && cp dist/${b}-macos-arm64 out/macos-arm64/${b} && chmod +x out/macos-arm64/${b}
           done
-          cp package.json out/macos-x64/ out/macos-arm64/
+          cp package.json out/macos-x64/
+          cp package.json out/macos-arm64/
           cd out/macos-x64 && tar czvf ../../devtunnel-cli-${{ steps.ver.outputs.VERSION }}-darwin-x64.tar.gz . && cd ../..
           cd out/macos-arm64 && tar czvf ../../devtunnel-cli-${{ steps.ver.outputs.VERSION }}-darwin-arm64.tar.gz . && cd ../..
 
