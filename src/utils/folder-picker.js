@@ -75,7 +75,14 @@ export async function selectFolder() {
     return null;
     
   } catch (error) {
-    console.error("Folder picker error:", error.message);
+    const msg = error && error.message ? error.message : String(error);
+    if (os === "win32" && (msg.includes("ENOENT") || msg.includes("spawn powershell"))) {
+      console.error("Folder picker: PowerShell not found. Run from a path or pass the project path as an argument.");
+    } else if (os !== "win32" && os !== "darwin" && (msg.includes("ENOENT") || msg.includes("spawn"))) {
+      console.error("Folder picker: zenity or kdialog not found. Install one (e.g. apt install zenity) or pass the project path as an argument.");
+    } else {
+      console.error("Folder picker error:", msg);
+    }
     return null;
   }
 }
@@ -96,15 +103,21 @@ function runPowerShell(script) {
     let stderr = "";
     proc.stderr?.on("data", (data) => stderr += data.toString());
     
-    proc.on("close", (code) => {
+    proc.on("close", (code, signal) => {
       if (code === 0) {
         resolve();
       } else {
-        reject(new Error(stderr || `PowerShell exited with code ${code}`));
+        reject(new Error(stderr || `PowerShell exited with code ${code ?? signal ?? 1}`));
       }
     });
     
-    proc.on("error", reject);
+    proc.on("error", (err) => {
+      if (err.code === "ENOENT") {
+        reject(new Error("PowerShell not found. Install it or use a different method to select the folder."));
+      } else {
+        reject(err);
+      }
+    });
   });
 }
 
@@ -124,17 +137,24 @@ function runCommand(command, args, outputFile) {
       });
     }
     
-    proc.on("close", (code) => {
-      if (code === 0) {
+    proc.on("close", (code, signal) => {
+      const exitCode = code ?? (signal ? 1 : 0);
+      if (exitCode === 0) {
         if (outputFile && stdout) {
-          writeFileSync(outputFile, stdout.trim());
+          try { writeFileSync(outputFile, stdout.trim()); } catch (_) {}
         }
         resolve();
       } else {
-        reject(new Error(`Command failed with code ${code}`));
+        reject(new Error(`Command failed with code ${exitCode}`));
       }
     });
     
-    proc.on("error", reject);
+    proc.on("error", (err) => {
+      if (err.code === "ENOENT") {
+        reject(new Error(`Command not found: ${command}`));
+      } else {
+        reject(err);
+      }
+    });
   });
 }

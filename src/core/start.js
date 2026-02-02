@@ -23,7 +23,7 @@ function getPackageVersion() {
   return "3.1.1";
 }
 
-// Helper to run command
+// Helper to run command (cross-platform)
 function runCommand(command, args = [], cwd = process.cwd()) {
   return new Promise((resolve) => {
     const proc = spawn(command, args, {
@@ -36,15 +36,16 @@ function runCommand(command, args = [], cwd = process.cwd()) {
     proc.stdout?.on("data", (data) => output += data.toString());
     proc.stderr?.on("data", (data) => output += data.toString());
 
-    proc.on("close", (code) => resolve({ code, output }));
-    proc.on("error", () => resolve({ code: 1, output: "" }));
+    proc.on("close", (code, signal) => resolve({ code: code ?? (signal ? 1 : 0), output }));
+    proc.on("error", (err) => resolve({ code: 1, output: "", error: err }));
   });
 }
 
-// Check if command exists
+// Check if command exists (Windows: where, macOS/Linux: which)
 async function commandExists(command) {
-  const result = await runCommand("where", [command]);
-  return result.code === 0;
+  const isWin = process.platform === "win32";
+  const result = await runCommand(isWin ? "where" : "which", [command]);
+  return result.code === 0 && (result.output || "").trim().length > 0;
 }
 
 // Check if a port is in use (dev server running)
@@ -280,14 +281,21 @@ async function main() {
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("");
 
-  // Step 1: Check Node.js
+  // Step 1: Check Node.js (version and availability)
   console.log("[1/4] Checking Node.js...");
-  if (!await commandExists("node")) {
-    console.log("ERROR: Node.js not found!");
+  const minNodeMajor = 16;
+  const currentMajor = parseInt(process.version.slice(1).split(".")[0], 10);
+  if (isNaN(currentMajor) || currentMajor < minNodeMajor) {
+    console.log("ERROR: Node.js " + minNodeMajor + "+ required. Current:", process.version);
     console.log("Install from: https://nodejs.org/");
     process.exit(1);
   }
-  console.log("SUCCESS: Node.js installed");
+  if (!await commandExists("node")) {
+    console.log("ERROR: Node.js not found in PATH.");
+    console.log("Install from: https://nodejs.org/");
+    process.exit(1);
+  }
+  console.log("SUCCESS: Node.js " + process.version + " installed");
   console.log("");
 
   // Step 2: Check Cloudflare (bundled or system-installed)
@@ -340,13 +348,19 @@ async function main() {
   console.log("[3/4] Checking dependencies...");
   const nodeModulesPath = join(PROJECT_ROOT, "node_modules");
   if (!existsSync(nodeModulesPath)) {
+    const hasNpm = await commandExists("npm");
+    if (!hasNpm) {
+      console.log("ERROR: npm not found. Node.js/npm is required.");
+      console.log("Install from: https://nodejs.org/");
+      process.exit(1);
+    }
     console.log("Installing dependencies...");
     console.log("");
     // Run npm install in the project root directory
     const result = await runCommand("npm", ["install"], PROJECT_ROOT);
     if (result.code !== 0) {
       console.log("");
-      console.log("ERROR: npm install failed");
+      console.log("ERROR: npm install failed" + (result.error ? ": " + result.error.message : ""));
       process.exit(1);
     }
     console.log("");
@@ -608,11 +622,14 @@ async function main() {
   if (isHtmlProject && !portInUseNow) {
     console.log("Starting built-in static server for HTML project...");
     const staticServerPath = join(__dirname, "static-server.js");
-    staticServerProcess = spawn("node", [staticServerPath, projectPath, devPort.toString()], {
+    const nodeBin = process.execPath;
+    staticServerProcess = spawn(nodeBin, [staticServerPath, projectPath, devPort.toString()], {
       stdio: "pipe",
       shell: false
     });
-    staticServerProcess.on("error", () => { });
+    staticServerProcess.on("error", (err) => {
+      console.error("ERROR: Could not start static server:", err.code === "ENOENT" ? "Node not found" : err.message);
+    });
     const ready = await waitForServerReady(devPort, 10000);
     if (!ready) {
       if (staticServerProcess) staticServerProcess.kill();
@@ -627,31 +644,38 @@ async function main() {
   // Start proxy server
   console.log("Starting services...");
   console.log("");
+  const nodeBin = process.execPath;
   const proxyPath = join(__dirname, "proxy-server.js");
   const proxyArgs = [proxyPath, devPort.toString(), proxyPort.toString(), projectName];
   if (basePath) proxyArgs.push(basePath);
-  const proxyProcess = spawn("node", proxyArgs, {
+  const proxyProcess = spawn(nodeBin, proxyArgs, {
     stdio: "inherit",
     shell: false
   });
+
+  const onChildError = (name, err) => {
+    console.error("\nERROR: " + name + " failed to start:", err.code === "ENOENT" ? "Node not found. Install from https://nodejs.org" : err.message);
+    process.exit(1);
+  };
+  proxyProcess.on("error", (err) => onChildError("Proxy server", err));
 
   // Wait for proxy to start
   await new Promise(resolve => setTimeout(resolve, 2000));
 
   // Run main tunnel app (connects to proxy port)
-  // Use shell: false to properly handle paths with spaces
   const indexPath = join(__dirname, "index.js");
-  const tunnelProcess = spawn("node", [indexPath, proxyPort.toString(), projectName, projectPath], {
+  const tunnelProcess = spawn(nodeBin, [indexPath, proxyPort.toString(), projectName, projectPath], {
     stdio: "inherit",
     shell: false
   });
+  tunnelProcess.on("error", (err) => onChildError("Tunnel service", err));
 
   // Handle cleanup
   const cleanup = () => {
     console.log("\nShutting down...");
-    if (staticServerProcess) staticServerProcess.kill();
-    proxyProcess.kill();
-    tunnelProcess.kill();
+    if (staticServerProcess) try { staticServerProcess.kill(); } catch (_) {}
+    try { proxyProcess.kill(); } catch (_) {}
+    try { tunnelProcess.kill(); } catch (_) {}
     process.exit(0);
   };
 
@@ -670,6 +694,10 @@ async function main() {
 
 // Run
 main().catch((error) => {
-  console.error("\nERROR:", error.message);
+  const msg = error && error.message ? error.message : String(error);
+  console.error("\nERROR:", msg);
+  if (error && error.code === "ENOENT") {
+    console.error("   A required command or file was not found. Check that Node.js is installed: https://nodejs.org");
+  }
   process.exit(1);
 });

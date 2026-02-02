@@ -221,6 +221,11 @@ async function tryTunnelServices() {
         stdio: "pipe"
       });
 
+      tunnelProcess.on("error", (err) => {
+        console.error("\nERROR: Tunnel process failed to start:", err.code === "ENOENT" ? `"${service.command}" not found` : err.message);
+        process.exit(1);
+      });
+
       setupTunnelHandlers(service.name);
       
       // Wait a bit to see if tunnel starts successfully
@@ -253,6 +258,7 @@ async function tryTunnelServices() {
 
 function setupTunnelHandlers(serviceName) {
   if (!tunnelProcess) return;
+  if (!tunnelProcess.stdout || !tunnelProcess.stderr) return;
 
   tunnelProcess.stdout.on("data", (data) => {
     const output = data.toString();
@@ -311,7 +317,7 @@ function setupTunnelHandlers(serviceName) {
     });
   });
 
-  tunnelProcess.stderr.on("data", (data) => {
+  tunnelProcess.stderr?.on("data", (data) => {
     const output = data.toString();
     
     // For Cloudflare, check if URL is in stderr (sometimes it is)

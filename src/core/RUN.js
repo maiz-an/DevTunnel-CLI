@@ -37,13 +37,20 @@ process.stdout.write('\x1B[2J\x1B[0f');
 console.clear();
 
 const startPath = join(__dirname, "start.js");
-const child = spawn("node", [startPath], {
+// Use same Node binary as current process (works when "node" is not in PATH)
+const nodeBin = process.execPath;
+const child = spawn(nodeBin, [startPath], {
   stdio: "inherit",
   shell: false
 });
 
-child.on("error", (error) => {
-  console.error("❌ Error starting app:", error.message);
+child.on("error", (err) => {
+  if (err.code === "ENOENT") {
+    console.error("❌ Node.js is required but could not be found.");
+    console.error("   Install from: https://nodejs.org");
+  } else {
+    console.error("❌ Error starting app:", err.message);
+  }
   process.exit(1);
 });
 
