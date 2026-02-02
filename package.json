@@ -1,6 +1,6 @@
 {
   "name": "devtunnel-cli",
-  "version": "3.1.3.1",
+  "version": "3.1.2",
   "type": "module",
   "description": "DevTunnel-CLI — fast, zero-config tool to share local servers for development, testing, demos, and webhook debugging. npm i -g devtunnel-cli.",
   "main": "src/core/start.js",
