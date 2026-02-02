@@ -10,28 +10,29 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Create Release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: DevTunnel ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
+          release_name: DevTunnel ${{ github.ref_name }}
           body: |
             ## Install
             ```bash
             npm i -g devtunnel-cli
             ```
             Then run `devtunnel-cli` from your project directory.
-            
+
             ## Features
             - Zero config, auto-detects project and port
             - Node, React, Laravel, HTML, PHP/XAMPP
             - Cloudflare, Ngrok, LocalTunnel fallback
-            
+
             **Website:** https://devtunnel-cli.vercel.app | **GitHub:** https://github.com/maiz-an/DevTunnel-CLI
           draft: false
           prerelease: false
