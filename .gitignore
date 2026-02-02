@@ -12,12 +12,5 @@ logs/*.log
 # Bundled binaries (downloaded on first run)
 bin/
 
-# Standalone build and release artifacts
-dist/
-deb-build/
-out/
-*.deb
-apt/
-
 !package.json
 !package-lock.json

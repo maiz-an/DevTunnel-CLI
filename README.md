@@ -10,15 +10,11 @@
 
 ## Install
 
-| Platform | Command |
-| -------- | ------- |
-| **Windows** | `winget install devtunnel-cli` |
-| **macOS** | `brew install devtunnel-cli` |
-| **Linux** | `sudo apt install devtunnel-cli` |
-| **npm** | `npm i -g devtunnel-cli` |
+```bash
+npm i -g devtunnel-cli
+```
 
-Windows, macOS, and Linux: same style — **standalone binary**, no Node required.  
-**Linux (first time only):** run once `curl -fsSL https://raw.githubusercontent.com/maiz-an/DevTunnel-CLI/main/scripts/install.sh | sudo sh` to add our APT repo, then use the command above. npm requires Node.
+Then run `devtunnel-cli` from your project directory.
 
 ---
 
@@ -34,8 +30,7 @@ DevTunnel-CLI is built for developers who need instant public URLs to share work
 
 ### Step-by-Step Guide
 
-**1. Install DevTunnel (one-time setup):**  
-Use **Windows** (winget), **macOS** (brew), **Linux** (apt), or **npm** — see the [Install](#install) table above.
+**1. Install DevTunnel (one-time setup):**
 
 ```bash
 npm i -g devtunnel-cli
@@ -86,7 +81,7 @@ devtunnel-cli    # Auto-detects project type and port!
 
 **Important:** Run `devtunnel-cli` from the same directory as your project!
 
-1. **Install DevTunnel** (one-time): use winget, brew, apt, or [npm](#install) above.
+1. **Install DevTunnel** (one-time): `npm i -g devtunnel-cli` — see [Install](#install) above.
 2. **Go to your project**: `cd your-project` (Node, Laravel, HTML, or XAMPP folder)
 3. **Have your app running**: `npm run dev`, `php artisan serve`, or XAMPP. For HTML, optional — DevTunnel can serve it.
 4. **Open a new terminal** in the same project directory
@@ -120,8 +115,7 @@ devtunnel-cli
 
 ## 🛠️ Requirements
 
-- **Windows / macOS / Linux (OS install):** No Node required — standalone binary.
-- **npm install:** Node.js 16+ ([nodejs.org](https://nodejs.org)).
+- Node.js 16+ ([nodejs.org](https://nodejs.org)).
 - Internet connection and your dev server running.
 
 Cloudflare is automatically bundled on first run.

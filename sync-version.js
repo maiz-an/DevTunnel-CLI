@@ -39,32 +39,7 @@ htmlContent = htmlContent.replace(
 fs.writeFileSync(htmlPath, htmlContent);
 console.log(`✅ Updated ${htmlPath}`);
 
-// 3. Update Formula/devtunnel-cli.rb
-const formulaPath = path.join(__dirname, 'Formula', 'devtunnel-cli.rb');
-if (fs.existsSync(formulaPath)) {
-  let formulaContent = fs.readFileSync(formulaPath, 'utf8');
-  formulaContent = formulaContent.replace(/version\s*=\s*"[\d.]+"/, `version = "${version}"`);
-  formulaContent = formulaContent.replace(/v#\{version\}/g, `v#{version}`);
-  fs.writeFileSync(formulaPath, formulaContent);
-  console.log(`✅ Updated ${formulaPath}`);
-}
-
-// 4. Update winget manifests
-const wingetDir = path.join(__dirname, 'winget');
-if (fs.existsSync(wingetDir)) {
-  for (const name of fs.readdirSync(wingetDir)) {
-    if (!name.endsWith('.yaml')) continue;
-    const yamlPath = path.join(wingetDir, name);
-    let yamlContent = fs.readFileSync(yamlPath, 'utf8');
-    yamlContent = yamlContent.replace(/PackageVersion:\s*[\d.]+/, `PackageVersion: ${version}`);
-    yamlContent = yamlContent.replace(/v[\d.]+(?=\/releases)/g, `v${version}`);
-    yamlContent = yamlContent.replace(/devtunnel-cli-[\d.]+-/g, `devtunnel-cli-${version}-`);
-    fs.writeFileSync(yamlPath, yamlContent);
-    console.log(`✅ Updated ${yamlPath}`);
-  }
-}
-
-// 5. Update website files (if paths exist)
+// 3. Update website files (if paths exist)
 const websitePath = path.resolve(__dirname, '../DevTunnelPages');
 if (fs.existsSync(websitePath)) {
   // Update page.tsx

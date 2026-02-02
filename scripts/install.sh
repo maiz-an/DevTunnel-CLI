@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
-# DevTunnel-CLI Linux install — same style as Windows (winget) and macOS (brew).
+# DevTunnel-CLI Linux install — one command, same style as Windows (winget) and macOS (brew).
 # Usage: curl -fsSL https://raw.githubusercontent.com/maiz-an/DevTunnel-CLI/main/scripts/install.sh | sudo sh
-# Then: sudo apt install devtunnel-cli (same as winget/brew)
+# This is the only install method for Linux: run it once; it installs everything (Debian/Ubuntu: APT repo + install; other: binary).
 
 set -e
 
