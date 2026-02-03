@@ -144,3 +144,4 @@ Find this project as: **DevTunnel**, **devtunnel**, **dev-tunnel**, **Dev-Tunnel
 - **npm**: [devtunnel-cli](https://www.npmjs.com/package/devtunnel-cli)
 - **GitHub**: [maiz-an/DevTunnel-CLI](https://github.com/maiz-an/DevTunnel-CLI)
 - **Issues**: [GitHub Issues](https://github.com/maiz-an/DevTunnel-CLI/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/maiz-an/DevTunnel-CLI/discussions)
